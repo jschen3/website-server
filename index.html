@@ -18,7 +18,7 @@ License: Creative Commons Attribution
 
 <script type="text/javascript" src="js/angular.js"></script>
 <script type="text/javascript" src="js/angular-animate.js"></script>
-<script type="text/javascript" src="js/slide-app.js"></script> 
+<script type="text/javascript" src="js/app.js"></script> 
 <script type="text/javascript" src="js/bootstrap.js"></script>
 <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
 </head>
@@ -49,8 +49,8 @@ License: Creative Commons Attribution
                             <h2>{{slide.title}}</h2>
                             <p>{{slide.text}}</p>
                             <p>
-                                <a href="{{slide.link1url}}">{{slide.link1text}}</a>
-                                <a href="{{slide.link2url}}">{{slide.link2text}}</a>
+                                <a href="{{slide.link1Url}}" class="button">{{slide.link1Text}}</a>
+                                <a href="{{slide.link2Url}}" class="button">{{slide.link2Text}}</a>
                             </p>
                         </div>
                     </div>
@@ -58,20 +58,20 @@ License: Creative Commons Attribution
             </uib-carousel>
         </div>
     </div>
-    <div id="body" class="width">
+    <div ng-controller="articleCtrl" id="body" class="width">
 		<section id="content" class="two-column with-right-sidebar">
-	    <article>		
-			<h2>Article 1</h2>
-			<div class="article-info">Posted on <time datetime="2013-05-14">14 May</time> by <a href="#" rel="author"></a></div>
-            <p>Welcome to educate, a free valid CSS3 &amp; HTML5 responsive web template from <a href="http://zypopwebtemplates.com/" title="ZyPOP">ZyPOP</a>. This template is completely <strong>free</strong> to use permitting a link remains back to  <a href="http://zypopwebtemplates.com/" title="ZyPOP">http://zypopwebtemplates.com/</a>. Should you wish to use this template unbranded you can buy a template license from our website for 8.00 GBP, this will allow you remove all branding related to our site, for more information about this see below.</p>	
-		  <a href="#" class="button">Read more</a>
-		  <a href="#" class="button button-reversed">Comments</a>
-		</article>
-		<article class="expanded">
-            <h2>Article 2</h2>
-			<div class="article-info">Posted on <time datetime="2013-05-14">14 May</time> by <a href="#" rel="author">Joe Bloggs</a></div>	
-            <p>Purchasing a template license for 8.00 GBP (at time of writing around 12 USD) gives you the right to remove any branding including links, logos and source tags relating to ZyPOP. As well as waiving the attribution requirement, your payment will also help us provide continued support for users as well as creating new web templates. Find out more about how to buy at the licensing page on our website which can be accessed at <a href="http://zypopwebtemplates.com/licensing" title="template license">http://zypopwebtemplates.com/licensing</a></p>
-		</article>
+        <article ng-repeat="article in articles">
+            <h2>{{article.title}}</h2>
+            <div class="article-info">Posted on 
+                <time datetime="{{article.dateNumbers}}">
+                    {{article.dateText}}
+                </time>
+                <p>{{article.text}}</p>
+                <p>
+                    <a href="{{article.linkurl}}" class="button">Read More</a>
+                </p>
+            </div>
+        </article>
         </section>
         <aside class="sidebar big-sidebar right-sidebar">
             <ul>	
@@ -79,7 +79,7 @@ License: Creative Commons Attribution
                     <h4>Archives</h4>
                     <ul class="blocklist">
                         <li><a class="selected" href="index.html">Homepage</a></li>
-                        <li><a href="january.html">January Articles</a></li>
+                        <li ng-repeat="month in months"><a href="{{month.url}}">{{month.month}}</a></li
                     </ul>   
                 </li>               
                 <li>

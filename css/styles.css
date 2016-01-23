@@ -81,10 +81,11 @@ a.button {
     color: #333;
     display: inline-block;
     font-weight: bold;
-    padding: 8px 15px;
+    padding: 8px 30px;
 	border: none;
     text-decoration: none;
     text-transform: uppercase;
+    margin-right: 10px;
 }
 
 a.button:hover {
@@ -786,4 +787,7 @@ footer p, footer p a {
 }
 .carousel-indicators{
 	bottom:-20px;
+}
+article .article-info a{
+	color: #333;
 }
