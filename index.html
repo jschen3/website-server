@@ -1,8 +1,9 @@
 <!doctype html>
-<html>
+<html ng-app="app">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Jimmy Chen Enterprising Programmer</title>
+<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
 <link rel="stylesheet" href="css/styles.css" type="text/css" />
 <!--[if lt IE 9]>
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -15,9 +16,10 @@ Download: http://zypopwebtemplates.com/
 License: Creative Commons Attribution
 //-->
 
-<script type="text/javascript" src="js/jquery-1.12.0.js"></script>
-<script type="text/javascript" src="js/angular.min.js"></script>
+<script type="text/javascript" src="js/angular.js"></script>
+<script type="text/javascript" src="js/angular-animate.js"></script>
 <script type="text/javascript" src="js/slide-app.js"></script> 
+<script type="text/javascript" src="js/bootstrap.js"></script>
 <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
 </head>
 
@@ -35,19 +37,21 @@ License: Creative Commons Attribution
     <div class="clear"></div>
     </nav>
     </header>
-<div ng-app="app" id="slides-container" class="slides-container width">
-    <div ng-controller="MainCtrl" id="slides">
-        <div ng-repeat="slide in slides">
-            <img ng-src="{{slide.image}}"/>
-            <h2>{{slide.title}}</h2>
-            <p>{{slide.text}}</p>
-            <p>
-                <a href="{{slide.link1url}}">{{slide.link1text}}</a>
-                <a href="{{slide.link2url}}">{{slide.link2text}}</a>
-            </p>
+    <div ng-controller="CarouselCtrl" class="width">
+        <div>
+            <uib-carousel interval="myInterval" no-wrap="noWrapSlides">
+                <uib-slide ng-repeat="slide in slides" active="slide.active" index="slide.id">
+                    <img ng-src="{{slide.image}}"/>
+                    <h2>{{slide.title}}</h2>
+                    <p>{{slide.text}}</p>
+                    <p>
+                        <a href="{{slide.link1url}}">{{slide.link1text}}</a>
+                        <a href="{{slide.link2url}}">{{slide.link2text}}</a>
+                    </p>
+                </uib-slide>
+            </uib-carousel>
         </div>
     </div>
-</div>
     <div id="body" class="width">
 		<section id="content" class="two-column with-right-sidebar">
 	    <article>		
@@ -80,9 +84,7 @@ License: Creative Commons Attribution
     </div>
 </div>
  <footer>
-
-         <p>&copy; YourSite 2014. <a href="http://zypopwebtemplates.com/">Free HTML5 Templates</a> by ZyPOP</p>
       
-    </footer>
+</footer>
 </body>
 </html>

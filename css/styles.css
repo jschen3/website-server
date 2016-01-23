@@ -5,7 +5,7 @@ body {
 	margin:0;
 	padding:0;
 	font-family: 'PT Sans', 'sans-serif';
-	font-size: 1.0em;
+	/*font-size: 1.0em;*/
 	color: #ddd;
 	font-weight: 200;
 }
@@ -708,13 +708,6 @@ footer p, footer p a {
 
 @media screen and (max-width: 350px) {
 	div.slides-container { height: 275px; }
-}
-.slide-image{
-	height: auto;
-	width: auto;
-	float: left;	
-	transform: rotate(90deg);
-	display: inline;
 }
 .resume-body{
 	background: #243B2A;
