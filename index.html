@@ -37,17 +37,23 @@ License: Creative Commons Attribution
     <div class="clear"></div>
     </nav>
     </header>
-    <div ng-controller="CarouselCtrl" class="width">
+    <div ng-controller="CarouselCtrl" class="width carousel">
         <div>
             <uib-carousel interval="myInterval" no-wrap="noWrapSlides">
                 <uib-slide ng-repeat="slide in slides" active="slide.active" index="slide.id">
-                    <img ng-src="{{slide.image}}"/>
-                    <h2>{{slide.title}}</h2>
-                    <p>{{slide.text}}</p>
-                    <p>
-                        <a href="{{slide.link1url}}">{{slide.link1text}}</a>
-                        <a href="{{slide.link2url}}">{{slide.link2text}}</a>
-                    </p>
+                    <div>
+                        <div class="carousel-left">
+                            <img ng-src="{{slide.image}}"/>
+                        </div>
+                        <div class="carousel-right">
+                            <h2>{{slide.title}}</h2>
+                            <p>{{slide.text}}</p>
+                            <p>
+                                <a href="{{slide.link1url}}">{{slide.link1text}}</a>
+                                <a href="{{slide.link2url}}">{{slide.link2text}}</a>
+                            </p>
+                        </div>
+                    </div>
                 </uib-slide>
             </uib-carousel>
         </div>
