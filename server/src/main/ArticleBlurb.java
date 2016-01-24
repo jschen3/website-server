@@ -1,4 +1,8 @@
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -46,6 +50,16 @@ public class ArticleBlurb {
 	}
 	public void setUrl(String url) {
 		this.url = url;
+	}
+	public void processFile(File file) throws IOException{
+		this.filePath=file.getAbsolutePath();
+		BufferedReader br= new BufferedReader(new FileReader(file));
+		this.title=br.readLine();
+		this.dateNumber=br.readLine();
+		this.dateText=br.readLine();
+		this.dateMonth=br.readLine();
+		this.text=br.readLine();
+		this.url=br.readLine();
 	}
 	@Override
 	public String toString() {
