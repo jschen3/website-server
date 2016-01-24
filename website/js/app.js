@@ -4,19 +4,19 @@ angular.module('app').controller('CarouselCtrl', function($scope){
             image: "images/intro-picture.jpg",
             title: "Introduction",
             text: "My name is Jimmy Chen and welcome to my website. I am an enterprising software developer and my current projects and articles posted on this page have been about machine learning and data mining. To learn more about me click the about me button. To find my resume click the resume button",
-            link1url:"",
-            link2url:"",
-            link1Text:"Resume",
-            link2Text:"About Me"
+            links:[
+                {url: "resume.html", text:"Resume"},
+                {url: "", text: "About me"}
+            ]
         },
         {
             image: "images/intro-picture.jpg",
             title: "Introduction",
             text: "My name is Jimmy Chen and welcome to my website. I am an enterprising software developer and my current projects and articles posted on this page have been about machine learning and data mining. To learn more about me click the about me button. To find my resume click the resume button",
-            link1Url:"",
-            link2Url:"",
-            link1Text:"Resume",
-            link2Text:"About Me"
+            links:[
+                {url: "resume.html", text:"Resume"},
+                {url: "", text: "About me"}
+            ]
     }];
 });
 angular.module('app').controller('articleCtrl', function($scope){

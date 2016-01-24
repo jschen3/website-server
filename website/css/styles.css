@@ -215,7 +215,7 @@ li ol, li ul {
 
 #container {
 	background-color: #FFFFFF;
-	width: auto;
+	width: 100%;
 	margin: 0 auto;
 }
 
@@ -763,8 +763,8 @@ footer p, footer p a {
 .carousel{
 	margin-top: 30px;
 	padding-bottom:30px;
-	margin-left: 5%;
-	margin-right: 5%;
+	margin-right: auto;
+	margin-left: auto;
 }
 .carousel-left{
 	float: left;
