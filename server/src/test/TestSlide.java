@@ -11,5 +11,12 @@ public class TestSlide {
 		Slide s = new Slide();
 		s.processFile(f);
 		System.out.println(s.toString());
+	}	
+	@Test
+	public void testSerialization() throws IOException{
+		File f= new File("/Users/Jimmy/Desktop/website/slides/introduction.txt");
+		Slide s = new Slide();
+		s.processFile(f);
+		//System.out.println(s.serialize());
 	}
 }

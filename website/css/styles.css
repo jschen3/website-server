@@ -244,7 +244,7 @@ header h1 a, header h1 a:hover {
 
 nav {
 	height: auto;
-	background-color: #5E5E5E;
+	background-color: #6E6E6E;
 }
 
 nav ul {
@@ -447,7 +447,7 @@ img {
 }
 
 #body {
-	background: #808080;
+	background: #777777;
 	margin: 5px auto 0;
  	padding: 5px 15px;
 	clear: both;

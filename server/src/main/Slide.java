@@ -6,12 +6,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+@JsonIgnoreProperties({"filePath"})
 public class Slide {
 	private String title;
 	private String imagePath;
 	private String text;
 	private ArrayList<Link> links;
-	@JsonIgnore
+	
 	private String filePath;
 	public String getTitle() {
 		return title;
@@ -60,6 +64,15 @@ public class Slide {
 			link.setText(text);
 			links.add(link);
 		}
+	}
+	public String serialize() throws JsonProcessingException{
+		ObjectMapper mapper= new ObjectMapper();
+		return mapper.writeValueAsString(this);
+	}
+	public void serializeIntoFile(File serializeFile) throws IOException{
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.writeValue(serializeFile, this);
+		
 	}
 	@Override
 	public String toString() {
