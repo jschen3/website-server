@@ -21,9 +21,9 @@ angular.module('app').controller('CarouselCtrl', function($scope, $http){
     console.log($scope.slides);
     
     $http.get("http://localhost:8080/Website/slides").then(function(response){
-        $scope.slides2 = response.data;
+        $scope.slides = response.data;
 
-        console.log($scope.slides2);
+        console.log($scope.slide2);
     });
     
 });

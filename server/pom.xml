@@ -37,7 +37,7 @@
 	<dependency>
 		<groupId>com.thetransactioncompany</groupId>
 		<artifactId>cors-filter</artifactId>
-		<version>[ version ]</version>
+		<version>2.5</version>
 	</dependency>
   </dependencies>
   <build>
