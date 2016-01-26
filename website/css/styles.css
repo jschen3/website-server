@@ -208,7 +208,7 @@ li ol, li ul {
 }
 
 .width {
-	max-width: 980px;
+	max-width: 850px;
 	margin: 0 auto;
 }
 
@@ -801,3 +801,4 @@ article .article-info a{
 	font-weight: bold;
 	text-decoration: underline;
 }
+.carousel

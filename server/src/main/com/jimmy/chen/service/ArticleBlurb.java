@@ -1,3 +1,5 @@
+package com.jimmy.chen.service;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -87,7 +89,7 @@ public class ArticleBlurb implements Comparable<ArticleBlurb>{
 	}
 	public void serializeIntoFile(File serializeFile) throws IOException{
 		ObjectMapper mapper = new ObjectMapper();
-		mapper.writeValue(serializeFile, this);
+		mapper.writerWithDefaultPrettyPrinter().writeValue(serializeFile, this);
 		
 	}
 	@Override
