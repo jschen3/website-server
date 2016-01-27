@@ -17,42 +17,42 @@ public class FileProcessor {
 	public static void main(String[] args) throws Exception {
 		removeExtraFiles();
 		processSlides();
-		processArticleBlurb();
+		processArticles();
 		
 	}
 	public static void removeExtraFiles() throws Exception{
 		File sourceSlideFolder=new File(WebsiteConstants.SOURCE_SLIDES);
-		File sourceABlurbFolder = new File(WebsiteConstants.SOURCE_ARTICLE_BLURBS);
+		File sourceArticleFolder = new File(WebsiteConstants.SOURCE_ARTICLES);
 		File currentSlideFolder = new File(WebsiteConstants.CURRENT_SLIDES+File.separator+"present");
-		File currentABlurbFolder = new File(WebsiteConstants.CURRENT_ARTICLE_BLURBS+File.separator+"present");
+		File currentArticleFolder = new File(WebsiteConstants.CURRENT_ARTICLES+File.separator+"present");
 		int newSlideCount = sourceSlideFolder.listFiles().length;
-		int newABlurbCount = sourceABlurbFolder.listFiles().length;
+		int newArticleCount = sourceArticleFolder.listFiles().length;
 		int currentSlideCount = currentSlideFolder.listFiles().length;
-		int currentABlurbCount = currentABlurbFolder.listFiles().length;
+		int currentArticleCount = currentArticleFolder.listFiles().length;
 		if (newSlideCount+currentSlideCount>WebsiteConstants.MAX_SLIDES){
 			removeSlideFile((newSlideCount+currentSlideCount)-WebsiteConstants.MAX_SLIDES);
 		}
-		if (newABlurbCount+currentABlurbCount>WebsiteConstants.MAX_BLURBS){
-			removeArticleBlurbFiles((newABlurbCount+currentABlurbCount)-WebsiteConstants.MAX_BLURBS);
+		if (newArticleCount+currentArticleCount>WebsiteConstants.MAX_ARTICLES){
+			removeArticleFiles(newArticleCount+currentArticleCount-WebsiteConstants.MAX_ARTICLES);
 		}
 		
 	}
-	public static void removeArticleBlurbFiles(int count) throws JsonParseException, JsonMappingException, IOException{
-		ArrayList<ArticleBlurb> blurbs = new ArrayList<ArticleBlurb>();
-		File currentABlurbFolder = new File(WebsiteConstants.CURRENT_ARTICLE_BLURBS+File.separator+"present");
-		File[] blurbFiles = currentABlurbFolder.listFiles();
+	public static void removeArticleFiles(int count) throws JsonParseException, JsonMappingException, IOException{
+		ArrayList<Article> articles = new ArrayList<Article>();
+		File currentArticleFolder = new File(WebsiteConstants.CURRENT_ARTICLES+File.separator+"present");
+		File[] articleFiles = currentArticleFolder.listFiles();
 		ObjectMapper mp = new ObjectMapper();
-		for (File f:blurbFiles){
-			blurbs.add(mp.readValue(f, ArticleBlurb.class));
+		for (File f:articleFiles){
+			articles.add(mp.readValue(f, Article.class));
 			f.delete();
 		}
-		Collections.sort(blurbs);
+		Collections.sort(articles);
 		for (int i=0;i<count;i++){
-			blurbs.remove(0);
+			articles.remove(0);
 		}
-		for (ArticleBlurb b:blurbs){
+		for (Article b:articles){
 			String fileName = b.getTitle().replace(" ", "_").toLowerCase()+".json";
-			String filePresentLocation=currentABlurbFolder.getAbsoluteFile()+File.separator+"present";
+			String filePresentLocation=currentArticleFolder.getAbsoluteFile()+File.separator+"present";
 			File resultFile = new File(filePresentLocation+File.separator+fileName);
 			mp.writeValue(resultFile, b);
 		}
@@ -91,22 +91,22 @@ public class FileProcessor {
 			//slideFile.delete();
 		}
 	}
-	public static void processArticleBlurb() throws Exception{
-		File sourceBlurbFolder = new File(WebsiteConstants.SOURCE_ARTICLE_BLURBS);
-		File[] files=sourceBlurbFolder.listFiles();
-		File currentBlurbFolder = new File(WebsiteConstants.CURRENT_ARTICLE_BLURBS);
+	public static void processArticles() throws Exception{
+		File sourceArticleFolder = new File(WebsiteConstants.SOURCE_ARTICLES);
+		File[] files=sourceArticleFolder.listFiles();
+		File currentArticleFolder = new File(WebsiteConstants.CURRENT_ARTICLES);
 		Calendar mCalendar = Calendar.getInstance();  
 		String month = mCalendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()).toLowerCase();
-		for(File blurbFile:files){
-			ArticleBlurb articleBlurb = new ArticleBlurb();
-			articleBlurb.processFile(blurbFile);
-			String fileName = articleBlurb.getTitle().replace(" ", "_").toLowerCase()+".json";
-			String filePresentLocation=currentBlurbFolder.getAbsoluteFile()+File.separator+"present";
-			String fileArchiveLocation=currentBlurbFolder.getAbsolutePath()+File.separator+"archive"+File.separator+month;
+		for(File articleFile:files){
+			Article article = new Article();
+			article.processFile(articleFile);
+			String fileName = article.getTitle().replace(" ", "_").toLowerCase()+".json";
+			String filePresentLocation=currentArticleFolder.getAbsoluteFile()+File.separator+"present";
+			String fileArchiveLocation=currentArticleFolder.getAbsolutePath()+File.separator+"archive"+File.separator+month;
 			File jsonPresentFile = new File(filePresentLocation+File.separator+fileName);
 			File jsonArchiveFile = new File(fileArchiveLocation+File.separator+fileName);
-			articleBlurb.serializeIntoFile(jsonPresentFile);
-			articleBlurb.serializeIntoFile(jsonArchiveFile);
+			article.serializeIntoFile(jsonPresentFile);
+			article.serializeIntoFile(jsonArchiveFile);
 			//blurbFile.delete();
 		}
 	}

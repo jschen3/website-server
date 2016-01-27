@@ -40,16 +40,16 @@ License: Creative Commons Attribution
     <div ng-controller="CarouselCtrl" class="width carousel center">
         <div>
             <uib-carousel interval="myInterval" no-wrap="noWrapSlides">
-                <uib-slide ng-repeat="slide in slides" active="slide.active" index="slide.id">
+                <uib-slide ng-repeat="slide in slides" active="slide.active" index="slide.id" ng-model="slide">
                     <div>
                         <div class="carousel-left">
-                            <img ng-src="{{slide.image}}"/>
+                            <img ng-src="{{slide.imagePath}}"/>
                         </div>
                         <div class="carousel-right">
                             <h2>{{slide.title}}</h2>
                             <p>{{slide.text}}</p>
                             <p>
-                                <a ng-repeat="link in slide.links" href="{{link.url}}" class="button">{{link.text}}</a>
+                                <a ng-repeat="link in slide.links" href="{{link.url}}" class="button" ng-bind="link.text"></a>
                             </p>
                         </div>
                     </div>
@@ -61,11 +61,11 @@ License: Creative Commons Attribution
 		<section id="content" class="two-column with-right-sidebar">
         <article ng-repeat="article in articles">
             <h2>{{article.title}}</h2>
-            <div class="article-info">Posted on 
+            <div class="article-time">Posted on 
                 <time datetime="{{article.dateNumbers}}">
                     {{article.dateText}}
                 </time>
-                <p>{{article.text}}</p>
+                <p>{{article.blurbText}}</p>
                 <p>
                     <a href="{{article.linkurl}}" class="button">Read More</a>
                 </p>

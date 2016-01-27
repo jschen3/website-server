@@ -1,7 +1,7 @@
 {
   "title" : "Introduction",
   "imagePath" : "images/intro-picture.jpg",
-  "text" : "\"My name is Jimmy Chen and welcome to my website. I am an enterprising software developer and my current projects and articles posted on this page have been about machine learning and data mining. To learn more about me click the about me button. To find my resume click the resume button\"",
+  "text" : "My name is Jimmy Chen and welcome to my website. I am an enterprising software developer and my current projects and articles posted on this page have been about machine learning and data mining. To learn more about me click the about me button. To find my resume click the resume button",
   "links" : [ {
     "text" : "Resume",
     "url" : "resume.html"

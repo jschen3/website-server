@@ -448,7 +448,7 @@ img {
 
 #body {
 	background: #777777;
-	margin: 5px auto 0;
+	margin: 20px auto 0;
  	padding: 5px 15px;
 	clear: both;
 	border-radius: 15px;
@@ -485,7 +485,7 @@ article h2 {
     padding-bottom: 0;
 }
 
-article .article-info {
+article .article-time {
     color: #000000;
     font-size: 0.9em;
     letter-spacing: -0.5px;

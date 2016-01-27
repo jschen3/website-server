@@ -13,21 +13,22 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@Path("/articleblurbs")
-public class ArticleBlurbService {
+@Path("/articles")
+public class ArticleService {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public String showArticleBlurbs() throws JsonParseException, JsonMappingException, IOException{
-		File blurbFolder = new File(WebsiteConstants.CURRENT_ARTICLE_BLURBS+File.separator+"present");
+		File articleFolder = new File(WebsiteConstants.CURRENT_ARTICLES+File.separator+"present");
 		//System.out.println(slideFolder.getAbsolutePath());
-		File[] blurbFiles = blurbFolder.listFiles();
-		ArrayList<ArticleBlurb> blurbs = new ArrayList<ArticleBlurb>();
+		File[] articleFiles = articleFolder.listFiles();
+		ArrayList<Article> articles = new ArrayList<Article>();
 		//System.out.println(Arrays.toString(slideFiles));
 		ObjectMapper mp = new ObjectMapper();
-		for (File blurbFile: blurbFiles){
-			ArticleBlurb ab=mp.readValue(blurbFile, ArticleBlurb.class);
-			blurbs.add(ab);
+		for (File articleFile: articleFiles){
+			Article a=mp.readValue(articleFile, Article.class);
+			articles.add(a);
 		}
-		return mp.writerWithDefaultPrettyPrinter().writeValueAsString(blurbs);
+		return mp.writerWithDefaultPrettyPrinter().writeValueAsString(articles);
 	}
+	
 }

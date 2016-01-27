@@ -43,12 +43,6 @@ public class Slide {
 	public void setLinks(ArrayList<Link> links) {
 		this.links = links;
 	}
-	public String getFilePath() {
-		return filePath;
-	}
-	public void setFilePath(String filePath) {
-		this.filePath = filePath;
-	}
 	public void processFile(File file) throws IOException{
 		this.filePath=file.getAbsolutePath();
 		BufferedReader br= new BufferedReader(new FileReader(file));
@@ -79,7 +73,7 @@ public class Slide {
 	@Override
 	public String toString() {
 		return "Slide [title=" + title + ", imagePath=" + imagePath + ", text="
-				+ text + ", links=" + links + ", filePath=" + filePath + "]";
+				+ text + ", links=" + links + "]";
 	}
 	
 	
