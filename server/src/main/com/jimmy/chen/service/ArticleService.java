@@ -6,8 +6,11 @@ import java.util.ArrayList;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
+import org.apache.commons.io.FilenameUtils;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -17,7 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class ArticleService {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public String showArticleBlurbs() throws JsonParseException, JsonMappingException, IOException{
+	public String showArticles() throws JsonParseException, JsonMappingException, IOException{
 		File articleFolder = new File(WebsiteConstants.CURRENT_ARTICLES+File.separator+"present");
 		//System.out.println(slideFolder.getAbsolutePath());
 		File[] articleFiles = articleFolder.listFiles();
@@ -25,10 +28,33 @@ public class ArticleService {
 		//System.out.println(Arrays.toString(slideFiles));
 		ObjectMapper mp = new ObjectMapper();
 		for (File articleFile: articleFiles){
-			Article a=mp.readValue(articleFile, Article.class);
-			articles.add(a);
+			String ext =  FilenameUtils.getExtension(articleFile.getName());
+			if (ext.equals("json")){
+				Article a=mp.readValue(articleFile, Article.class);
+				articles.add(a);
+			}
 		}
 		return mp.writerWithDefaultPrettyPrinter().writeValueAsString(articles);
 	}
-	
+	@GET
+	@Path("{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String showSpecificArticle(@PathParam("id") String urlId) throws JsonParseException, JsonMappingException, IOException{
+		File articleFolder = new File(WebsiteConstants.CURRENT_ARTICLES+File.separator+"all");
+		//System.out.println(slideFolder.getAbsolutePath());
+		File[] articleFiles = articleFolder.listFiles();
+		//System.out.println(Arrays.toString(slideFiles));
+		ObjectMapper mp = new ObjectMapper();
+		for (File articleFile: articleFiles){
+			String ext =  FilenameUtils.getExtension(articleFile.getName());
+			if (ext.equals("json")){
+				Article a = mp.readValue(articleFile, Article.class);
+				if (a.getId().equals(urlId)){
+					return mp.writerWithDefaultPrettyPrinter().writeValueAsString(a);
+					
+				}
+			}
+		}
+		return "article not found";
+	}
 }

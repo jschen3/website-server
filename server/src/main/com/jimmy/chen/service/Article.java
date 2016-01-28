@@ -71,6 +71,22 @@ public class Article implements Comparable<Article>{
 	public void setDateDay(int dateDay) {
 		this.dateDay = dateDay;
 	}
+	
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	public ArrayList<ArticleComponent> getArticleComponents() {
+		return articleComponents;
+	}
+	public void setArticleComponents(ArrayList<ArticleComponent> articleComponents) {
+		this.articleComponents = articleComponents;
+	}
+	public void setBlurbText(String blurbText) {
+		this.blurbText = blurbText;
+	}
 	public void processFile(File file) throws IOException, ParseException{
 		BufferedReader br= new BufferedReader(new FileReader(file));
 		this.title=br.readLine();
@@ -78,6 +94,7 @@ public class Article implements Comparable<Article>{
 		this.dateText=br.readLine();
 		this.dateMonth=br.readLine();
 		this.blurbText=br.readLine();
+		this.url="";
 		SimpleDateFormat myFormat = new SimpleDateFormat("MM dd yyyy");
 		Date date = myFormat.parse(dateNumber.replace("-", " "));
 		Date jan1 = myFormat.parse("01 01 2016");
@@ -85,14 +102,24 @@ public class Article implements Comparable<Article>{
 		this.dateDay=(int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
 		this.id=UUID.randomUUID().toString();
 		String next;
-		String second;
 		this.articleComponents = new ArrayList<ArticleComponent>();
 		while((next=br.readLine())!=null){
-			second=br.readLine();
 			ArticleComponent ac = new ArticleComponent();
-			ac.setImage(next);
-			ac.setText(second);
-			articleComponents.add(ac);
+			ArrayList<String> acImages = new ArrayList<String>();
+			ArrayList<String> acText = new ArrayList<String>();
+			while(next!=null && !next.equals("###")){
+				if (next.substring(0,6).equals("image:")){
+					String imagePath = next.substring(6);
+					acImages.add(imagePath);
+				}
+				else{
+					acText.add(next);
+				}
+				next=br.readLine();
+			}
+			ac.setImage(acImages);
+			ac.setText(acText);
+;			articleComponents.add(ac);
 		}
 	}
 	public void serializeIntoFile(File serializeFile) throws IOException{
@@ -109,7 +136,6 @@ public class Article implements Comparable<Article>{
 				+ ", dateDay=" + dateDay + ", articleComponents="
 				+ articleComponents + "]";
 	}
-	
 	public String serialize() throws JsonProcessingException{
 		ObjectMapper mapper= new ObjectMapper();
 		return mapper.writeValueAsString(this);

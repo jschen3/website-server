@@ -7,6 +7,8 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Locale;
 
+import org.apache.commons.io.FilenameUtils;
+
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -80,15 +82,18 @@ public class FileProcessor {
 		File currentSlideFolder = new File(WebsiteConstants.CURRENT_SLIDES);
 		for(File slideFile:files){
 			Slide slide = new Slide();
-			slide.processFile(slideFile);
-			String fileName=slide.getTitle().replace(" ","_").toLowerCase()+".json";
-			String filePresentLocation=currentSlideFolder.getAbsolutePath()+File.separator+"present";
-			String fileArchiveLocation=currentSlideFolder.getAbsolutePath()+File.separator+"archive";
-			File jsonPresentFile = new File(filePresentLocation+File.separator+fileName);
-			File jsonArchiveFile = new File(fileArchiveLocation+File.separator+fileName);
-			slide.serializeIntoFile(jsonPresentFile);
-			slide.serializeIntoFile(jsonArchiveFile);
+			String ext =  FilenameUtils.getExtension(slideFile.getName());
+			if (ext.equals("txt")){
+				slide.processFile(slideFile);
+				String fileName=slide.getTitle().replace(" ","_").toLowerCase()+".json";
+				String filePresentLocation=currentSlideFolder.getAbsolutePath()+File.separator+"present";
+				String fileArchiveLocation=currentSlideFolder.getAbsolutePath()+File.separator+"archive";
+				File jsonPresentFile = new File(filePresentLocation+File.separator+fileName);
+				File jsonArchiveFile = new File(fileArchiveLocation+File.separator+fileName);
+				slide.serializeIntoFile(jsonPresentFile);
+				slide.serializeIntoFile(jsonArchiveFile);
 			//slideFile.delete();
+			}
 		}
 	}
 	public static void processArticles() throws Exception{
@@ -98,16 +103,22 @@ public class FileProcessor {
 		Calendar mCalendar = Calendar.getInstance();  
 		String month = mCalendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()).toLowerCase();
 		for(File articleFile:files){
-			Article article = new Article();
-			article.processFile(articleFile);
-			String fileName = article.getTitle().replace(" ", "_").toLowerCase()+".json";
-			String filePresentLocation=currentArticleFolder.getAbsoluteFile()+File.separator+"present";
-			String fileArchiveLocation=currentArticleFolder.getAbsolutePath()+File.separator+"archive"+File.separator+month;
-			File jsonPresentFile = new File(filePresentLocation+File.separator+fileName);
-			File jsonArchiveFile = new File(fileArchiveLocation+File.separator+fileName);
-			article.serializeIntoFile(jsonPresentFile);
-			article.serializeIntoFile(jsonArchiveFile);
+			String ext =  FilenameUtils.getExtension(articleFile.getName());
+			if (ext.equals("txt")){
+				Article article = new Article();
+				article.processFile(articleFile);
+				String fileName = article.getTitle().replace(" ", "_").toLowerCase()+".json";
+				String filePresentLocation=currentArticleFolder.getAbsoluteFile()+File.separator+"present";
+				String fileArchiveLocation=currentArticleFolder.getAbsolutePath()+File.separator+"archive"+File.separator+month;
+				String fileAllLocation=currentArticleFolder.getAbsolutePath()+File.separator+"all";
+				File jsonPresentFile = new File(filePresentLocation+File.separator+fileName);
+				File jsonArchiveFile = new File(fileArchiveLocation+File.separator+fileName);
+				File jsonAllFile = new File(fileAllLocation+File.separator+fileName);
+				article.serializeIntoFile(jsonPresentFile);
+				article.serializeIntoFile(jsonArchiveFile);
+				article.serializeIntoFile(jsonAllFile);
 			//blurbFile.delete();
+			}
 		}
 	}
 

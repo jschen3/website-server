@@ -1,19 +1,25 @@
 package com.jimmy.chen.service;
 
+import java.util.ArrayList;
+
 public class ArticleComponent {
-	private String image;
-	private String text;
-	public String getImage() {
-		return image;
+	private ArrayList<String> images;
+	private ArrayList<String> texts;
+	public ArrayList<String> getImage() {
+		return images;
 	}
-	public void setImage(String image) {
-		this.image = image;
+	public void setImage(ArrayList<String> images) {
+		this.images = images;
 	}
-	public String getText() {
-		return text;
+	public ArrayList<String> getTexts() {
+		return texts;
 	}
-	public void setText(String text) {
-		this.text = text;
+	public void setText(ArrayList<String> texts) {
+		this.texts = texts;
+	}
+	@Override
+	public String toString() {
+		return "ArticleComponent [images=" + images + ", texts=" + texts + "]";
 	}
 	
 }

@@ -10,6 +10,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.apache.commons.io.FilenameUtils;
+
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -27,8 +29,11 @@ public class SlideService {
 		//System.out.println(Arrays.toString(slideFiles));
 		ObjectMapper mp = new ObjectMapper();
 		for (File slideFile: slideFiles){
-			Slide s=mp.readValue(slideFile, Slide.class);
-			slides.add(s);
+			String ext =  FilenameUtils.getExtension(slideFile.getName());
+			if (ext.equals("json")){
+				Slide s=mp.readValue(slideFile, Slide.class);
+				slides.add(s);
+			}
 		}
 		return mp.writerWithDefaultPrettyPrinter().writeValueAsString(slides);
 	}
