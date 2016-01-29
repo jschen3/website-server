@@ -94,13 +94,13 @@ public class Article implements Comparable<Article>{
 		this.dateText=br.readLine();
 		this.dateMonth=br.readLine();
 		this.blurbText=br.readLine();
-		this.url="";
 		SimpleDateFormat myFormat = new SimpleDateFormat("MM dd yyyy");
 		Date date = myFormat.parse(dateNumber.replace("-", " "));
 		Date jan1 = myFormat.parse("01 01 2016");
 		long diff = date.getTime()-jan1.getTime();
 		this.dateDay=(int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
 		this.id=UUID.randomUUID().toString();
+		this.url="article.html#/?id="+this.id;
 		String next;
 		this.articleComponents = new ArrayList<ArticleComponent>();
 		while((next=br.readLine())!=null){

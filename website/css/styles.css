@@ -801,4 +801,14 @@ article .article-info a{
 	font-weight: bold;
 	text-decoration: underline;
 }
-.carousel
+.article-image{
+	margin-top: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
+.article-text{
+	
+	text-indent: 30px;
+	margin-top: 20px;
+}

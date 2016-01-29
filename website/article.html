@@ -9,34 +9,36 @@
 <script type="text/javascript" src="js/angular-animate.js"></script>
 <script type="text/javascript" src="js/articleapp.js"></script> 
 <script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/angular-route.js"></script>
 <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
 </head>
-<div id="container">
-    <header>    
-        <nav>
-            <div class="width">
-                <ul class="sf-menu dropdown">
-                    <li class="selected"><a href="index.html">Home</a></li>
-                    <li><a href="resume.html">Resume</a></li>
-                    <li><a href="projects.html">Projects</a></li>
-                    <li><a href="aboutme.html">About Me</a></li>
-                </ul>
-            </div>
-            <div class="clear"></div>
-        </nav>
-    </header>
-</div>
-    <div id="body" class="width">
-        <h2>{{article.title}}</h2>
-        <div class="article-time">Posted on
-            <time datetime="{{article.dateNumber}}">{{article.dateText}}</time>
-        </div>
-        <div>
-            <div ng-repeat="articleComponent in article.articleComponents">
-                <img ng-repeat="image in articleComponent.images" ng-src="{{image}}"/>
-                <p ng-repeat="text in articleComponent.texts">{{text}}</p>
-            </div>
-        </div>
+<body>
+    <div id="container">
+        <header>    
+            <nav>
+                <div class="width">
+                    <ul class="sf-menu dropdown">
+                        <li class="selected"><a href="index.html">Home</a></li>
+                        <li><a href="resume.html">Resume</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="aboutme.html">About Me</a></li>
+                    </ul>
+                </div>
+                <div class="clear"></div>
+            </nav>
+        </header>
     </div>
+        <div id="body" class="width">
+            <h2 ng-bind="article.title"></h2>
+            <div class="article-time">Posted on
+                <time datetime="{{article.dateNumber}}">{{article.dateText}}</time>
+            </div>
+            <div>
+                <div ng-repeat="articleComponent in article.articleComponents">
+                    <img ng-repeat="image in articleComponent.image" ng-src="{{image}}" class="article-image"/>
+                    <p ng-repeat="text in articleComponent.texts" class="article-text">{{text}}</p>
+                </div>
+            </div>
+        </div>
 </body>
 </html>
