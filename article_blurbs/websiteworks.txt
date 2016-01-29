@@ -1,6 +1,0 @@
-Making This Website Works
-01-23-2016
-January 23, 2016
-January
-I designed this website to use a combination of emerging web technologies. Namely angular, json java servlets, and the classics html and css. What is particularly unique is the websites use of templates to make the producing of dynamic content and more pages quickly.
-websiteworks.html
