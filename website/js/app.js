@@ -1,14 +1,14 @@
-angular.module('app',['ngAnimate','ui.bootstrap']);
-angular.module('app').controller('CarouselCtrl', function($scope, $http){
-    
-    $http.get("http://localhost:8080/Website/slides").then(function(response){
+angular.module('app',['ngAnimate','ui.bootstrap', 'Constants']);
+angular.module('app').controller('CarouselCtrl', ['$scope', '$http', 'SLIDE_URL', function($scope, $http, slideUrl){
+
+    $http.get(slideUrl).then(function(response){
         $scope.slides = response.data;
 
         console.log($scope.slides);
     });
     
-});
-angular.module('app').controller('articleCtrl', function($scope, $http){
+}]);
+angular.module('app').controller('articleCtrl', ['$scope', '$http', 'ARTICLE_URL', function($scope, $http, articleUrl){
  /*   
     $scope.articles=[{
         title: "Article 1",
@@ -25,7 +25,7 @@ angular.module('app').controller('articleCtrl', function($scope, $http){
         linkUrl: ""
     }];
     */
-    $http.get("http://localhost:8080/Website/articles").then(function(response){
+    $http.get(articleUrl).then(function(response){
         $scope.articles = response.data;
         console.log($scope.articles);
     });
@@ -37,4 +37,4 @@ angular.module('app').controller('articleCtrl', function($scope, $http){
         url: "",
         month: "February Articles"
     }];
-});
+}]);
