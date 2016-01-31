@@ -1,0 +1,22 @@
+{
+  "title" : "How Does This Website Work?",
+  "dateNumber" : "01-31-2016",
+  "dateText" : "January 31, 2016",
+  "dateMonth" : "january",
+  "blurbText" : "I just recently finished the minimum working product on my website and I wanted to discuss some of the major features of the website, how the website works and how it flows together. ",
+  "id" : "54e37d3a-5077-476a-99a3-74d9df0dce77",
+  "url" : "article.html#/?id=54e37d3a-5077-476a-99a3-74d9df0dce77",
+  "articleComponents" : [{
+    "texts" : [ "I just recently finished the minimum working product on my website and I wanted to discuss some of the major features of the website, how the website works and how it flows together. " ],
+    "image" : [ ]
+  }, {
+    "texts" : [ "Let's start with templates, a major building block of all three of the above categories. First, what is a template? A template is a particular format that allows content to vary and change with significantly less work. As every article, slide or article blurb stays the same templates are particularly good design technique. Perhaps this can be better explained by an example look at the most recent 2 articles. My trip to china and this page. The china article has pictures and text while this article only has text, but everything else is the same.  This format and content is changed and preformed using templates." ],
+    "image" : [ ]
+  }, {
+    "texts" : [ "Templates are created using angular and a json server. Angular reads the json content on the server and angular creates the website from the server content. " ],
+    "image" : [ ]
+  }, {
+    "texts" : [ "Future plans. I have three major features I plan to add to the website in the future. Those features are a comment section, to allow people comment and make suggestions on future topics etc. A stats section to see how many people are visiting the website and etc. Lastly the projects section, a section of code and etc on what I am working on." ],
+    "image" : [ " images/how_does_this_website_work?/template-code.png", " images/how_does_this_website_work?/template-json.png" ]
+  } ]
+}
