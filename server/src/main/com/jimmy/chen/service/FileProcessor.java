@@ -114,6 +114,10 @@ public class FileProcessor {
 				File jsonPresentFile = new File(filePresentLocation+File.separator+fileName);
 				File jsonArchiveFile = new File(fileArchiveLocation+File.separator+fileName);
 				File jsonAllFile = new File(fileAllLocation+File.separator+fileName);
+				String archiveLocationFolderString = currentArticleFolder.getAbsolutePath()+File.separator+"archive"+File.separator+month;
+				File archiveLocationFolder = new File(archiveLocationFolderString);
+				if (!archiveLocationFolder.exists())
+					archiveLocationFolder.mkdirs();
 				article.serializeIntoFile(jsonPresentFile);
 				article.serializeIntoFile(jsonArchiveFile);
 				article.serializeIntoFile(jsonAllFile);
