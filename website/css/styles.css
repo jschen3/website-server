@@ -765,6 +765,7 @@ footer p, footer p a {
 	padding-bottom:30px;
 	margin-right: auto;
 	margin-left: auto;
+	height: 400px;
 }
 .carousel-left{
 	float: left;
