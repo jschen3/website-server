@@ -766,7 +766,7 @@ footer p, footer p a {
 	padding-bottom:15px;
 	margin-right: auto;
 	margin-left: auto;
-	height: 400px;
+	height: 375px;
 }
 .carousel-left{
 	float: left;
@@ -813,4 +813,31 @@ article .article-info a{
 	
 	text-indent: 30px;
 	margin-top: 20px;
+}
+.project-body{
+	margin: 20px auto 0;
+ 	padding: 5px 15px;
+	clear: both;
+	border-radius: 15px;
+	height: auto;
+}
+.project-button { 
+    background: #337ab7;
+    color: #FFFFFF;
+    display: inline-block;
+    font-weight: bold;
+    padding: 10px 10px 10px 10px;
+	border: none;
+    text-decoration: none;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+.project-button:hover {
+	color: #FFFFFF;
+	background-color:#135a97;
+	text-decoration: none;
+}
+.project-div{
+   	border-bottom: 2px solid black;
+   	clear: both;
 }
