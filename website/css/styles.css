@@ -774,9 +774,6 @@ footer p, footer p a {
 }	
 .carousel-right{
 	text-align: left;
-	position: relative;
-	top: 50%;
-	transform: translateY(50%);
 }
 .carousel-control.left, .carousel-control.right {
     background-image: none
@@ -791,8 +788,7 @@ footer p, footer p a {
 	color: #5E5E5E;
 }
 .carousel-indicators{
-	bottom:-20px;
-	color: #5E5E5E;
+	display: none;
 }
 article .article-info a{
 	color: #FFFFFF;
