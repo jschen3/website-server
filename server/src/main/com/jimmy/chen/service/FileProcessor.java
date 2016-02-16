@@ -17,7 +17,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class FileProcessor {
 	static WebsiteConstants wc = new WebsiteConstants();
 	public static void main(String[] args) throws Exception {
-		removeExtraFiles();
+		//removeExtraFiles();
 		processSlides();
 		processArticles();
 		
