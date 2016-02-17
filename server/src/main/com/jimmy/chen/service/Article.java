@@ -98,16 +98,19 @@ public class Article implements Comparable<Article>{
 		Date date = myFormat.parse(dateNumber.replace("-", " "));
 		Date jan1 = myFormat.parse("01 01 2016");
 		long diff = date.getTime()-jan1.getTime();
-		this.dateDay=(int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+		System.out.println(diff);
+		System.out.println(TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
+		this.dateDay=(int)(long)TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+		System.out.println(this.dateDay);
 		this.id=UUID.randomUUID().toString();
 		this.url="article.html#/?id="+this.id;
 		String next;
 		this.articleComponents = new ArrayList<ArticleComponent>();
-		while((next=br.readLine())!=null){
+		while((next=br.readLine())!=null && !next.equals("")){
 			ArticleComponent ac = new ArticleComponent();
 			ArrayList<String> acImages = new ArrayList<String>();
 			ArrayList<String> acText = new ArrayList<String>();
-			while(next!=null && !next.equals("###")){
+			while(next!=null && !next.equals("###") && next.equals("")){
 				if (next.substring(0,6).equals("image:")){
 					String imagePath = next.substring(6);
 					acImages.add(imagePath);
@@ -144,7 +147,7 @@ public class Article implements Comparable<Article>{
 	public int compareTo(Article o) {
 		// TODO Auto-generated method stub
 		int compareQuantity = o.getDateDay();
-		return this.dateDay - compareQuantity;
+		return  compareQuantity- this.getDateDay();
 	}
 
 	

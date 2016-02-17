@@ -4,25 +4,40 @@
   "dateText" : "January 31, 2016",
   "dateMonth" : "january",
   "blurbText" : "I just recently finished the minimum working product on my website and I wanted to discuss some of the major features of the website, how the website works and how it flows together. ",
-  "id" : "2c11360f-5e88-45f9-aa7b-183c5f5e97da",
-  "url" : "article.html#/?id=2c11360f-5e88-45f9-aa7b-183c5f5e97da",
+  "id" : "61da83ee-9b20-473d-ba6e-51a09f62f446",
+  "url" : "article.html#/?id=61da83ee-9b20-473d-ba6e-51a09f62f446",
   "articleComponents" : [ {
     "texts" : [ ],
     "image" : [ ]
   }, {
-    "texts" : [ "I just recently finished the minimum working product on my website and I wanted to discuss some of the major features of the website, how the website works and how it flows together. " ],
-    "image" : [ ]
-  }, {
-    "texts" : [ "The website is currently composed of 5 major parts -- namely slides, articles, about me, resume and eventually projects. Unfortunately projects is not finished yet. " ],
-    "image" : [ ]
-  }, {
-    "texts" : [ "The most significant parts of the website at least programmatically currently are slides, and articles. These parts used an exciting technique called templates. Templates are a coding technique where you create a form or website basics without the content and later create new websites simply by changing the content. The form stays the same. This allows more rapid deployment of new articles and slides. In my case I used a combination of angular and a json backend server to project new slides and articles. " ],
-    "image" : [ ]
-  }, {
-    "texts" : [ "Here is some sample code perhaps you can figure out the rest of how it works by your self." ],
+    "texts" : [ ],
     "image" : [ ]
   }, {
     "texts" : [ ],
-    "image" : [ "images/how_does_this_website_work?/template-code.png", "images/how_does_this_website_work?/template-json.png" ]
+    "image" : [ ]
+  }, {
+    "texts" : [ ],
+    "image" : [ ]
+  }, {
+    "texts" : [ ],
+    "image" : [ ]
+  }, {
+    "texts" : [ ],
+    "image" : [ ]
+  }, {
+    "texts" : [ ],
+    "image" : [ ]
+  }, {
+    "texts" : [ ],
+    "image" : [ ]
+  }, {
+    "texts" : [ ],
+    "image" : [ ]
+  }, {
+    "texts" : [ ],
+    "image" : [ ]
+  }, {
+    "texts" : [ ],
+    "image" : [ ]
   } ]
 }

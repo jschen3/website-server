@@ -1,7 +1,7 @@
 package com.jimmy.chen.service;
 
 public class WebsiteConstants {
-	public static final String CURRENT_ARTICLES=// "/home/ubuntu/website/server/current/articles";
+	public static final String CURRENT_ARTICLES=//"/home/ubuntu/website/server/current/articles";
 	"/Users/Jimmy/Desktop/website/server/current/articles";  
 	public static final String CURRENT_PROJECTS= //"/home/ubuntu/website/server/current/projects";
 	"/Users/Jimmy/Desktop/website/server/current/projects";

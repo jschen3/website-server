@@ -53,7 +53,7 @@ public class Slide {
 		int counter=0;
 		String url;
 		String text;
-		while((url=br.readLine())!=null){
+		while((url=br.readLine())!=null && !url.equals("")){
 			Link link = new Link();
 			link.setUrl(url);
 			text=br.readLine();

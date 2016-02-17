@@ -3,6 +3,7 @@ package com.jimmy.chen.service;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -34,6 +35,7 @@ public class ArticleService {
 				articles.add(a);
 			}
 		}
+		Collections.sort(articles);
 		return mp.writerWithDefaultPrettyPrinter().writeValueAsString(articles);
 	}
 	@GET

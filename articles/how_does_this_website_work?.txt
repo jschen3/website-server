@@ -12,5 +12,5 @@ The most significant parts of the website at least programmatically currently ar
 ###
 Here is some sample code perhaps you can figure out the rest of how it works by your self.
 ###
-image:images/how_does_this_website_work?/template-code.png
-image:images/how_does_this_website_work?/template-json.png
+image:images/how_does_this_website_work/template-code.png
+image:images/how_does_this_website_work/template-json.png
