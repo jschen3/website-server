@@ -16,7 +16,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-@JsonIgnoreProperties({"dateDay"})
 public class Article implements Comparable<Article>{
 	private String title;
 	private String dateNumber;
