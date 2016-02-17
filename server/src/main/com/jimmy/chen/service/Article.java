@@ -16,6 +16,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+@JsonIgnoreProperties({"dateDay"})
 public class Article implements Comparable<Article>{
 	private String title;
 	private String dateNumber;
@@ -105,11 +106,11 @@ public class Article implements Comparable<Article>{
 		this.url="article.html#/?id="+this.id;
 		String next;
 		this.articleComponents = new ArrayList<ArticleComponent>();
-		while((next=br.readLine())!=null && !next.equals("")){
+		while((next=br.readLine())!=null){
 			ArticleComponent ac = new ArticleComponent();
 			ArrayList<String> acImages = new ArrayList<String>();
 			ArrayList<String> acText = new ArrayList<String>();
-			while(next!=null && !next.equals("###") && next.equals("")){
+			while(next!=null && !next.equals("###")){
 				if (next.substring(0,6).equals("image:")){
 					String imagePath = next.substring(6);
 					acImages.add(imagePath);
