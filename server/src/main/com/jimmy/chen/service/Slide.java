@@ -20,6 +20,7 @@ public class Slide {
 	private String title;
 	private String imagePath;
 	private String text;
+	private String id;
 	private boolean readMoreSlide;
 	private String readMoreUrl;
 	private ArrayList<Link> links;
@@ -49,6 +50,24 @@ public class Slide {
 	}
 	public void setLinks(ArrayList<Link> links) {
 		this.links = links;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public boolean isReadMoreSlide() {
+		return readMoreSlide;
+	}
+	public void setReadMoreSlide(boolean readMoreSlide) {
+		this.readMoreSlide = readMoreSlide;
+	}
+	public String getReadMoreUrl() {
+		return readMoreUrl;
+	}
+	public void setReadMoreUrl(String readMoreUrl) {
+		this.readMoreUrl = readMoreUrl;
 	}
 	public void processFile(File file) throws IOException{
 		BufferedReader br= new BufferedReader(new FileReader(file));
