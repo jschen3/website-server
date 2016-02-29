@@ -12,11 +12,18 @@ import java.util.Date;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.io.FileUtils;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-//@JsonIgnoreProperties({"dateDay"})
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.DBObject;
+import com.mongodb.MongoClient;
+import com.mongodb.util.JSON;
+@JsonIgnoreProperties({"mongoDB","mongoClient","aCollection"})
 public class Article implements Comparable<Article>{
 	private String title;
 	private String dateNumber;
@@ -27,7 +34,9 @@ public class Article implements Comparable<Article>{
 	private String url;
 	private int dateDay;
 	private ArrayList<ArticleComponent> articleComponents;
-	
+	private MongoClient mongoClient = new MongoClient();
+	private DB mongoDB = mongoClient.getDB("website");
+	private DBCollection aCollection=mongoDB.getCollection("articles");
 	
 	public String getTitle() {
 		return title;
@@ -149,6 +158,10 @@ public class Article implements Comparable<Article>{
 		int compareQuantity = o.getDateDay();
 		return  compareQuantity- this.getDateDay();
 	}
-
+	public void insertIntoDb(File jsonFile) throws IOException{
+		String jsonFileString=FileUtils.readFileToString(jsonFile);
+		DBObject articleObj = (DBObject) JSON.parse(jsonFileString);
+		aCollection.insert(articleObj);
+	}
 	
 }
