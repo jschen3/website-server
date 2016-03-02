@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
+import org.bson.types.ObjectId;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -40,17 +41,22 @@ public class InsertFilesIntoDB {
 	}
 
 	private static void insertImages(String folderPath) throws IOException {
-		MongoClient mongoClient = new MongoClient();
+		MongoClient mongoClient = new MongoClient("localhost", 27017);
 		File folder = new File(folderPath);
 		DB mongoDB = mongoClient.getDB("images");
 		GridFS imageStore = new GridFS(mongoDB, folder.getName());
+		System.out.println(folder.getName());
 		File[] folderFiles = folder.listFiles();
 		int id = 0;
+		ObjectId o=new ObjectId();
 		for (File f : folderFiles) {
 			GridFSInputFile inputFile = imageStore.createFile(f);
-			inputFile.setId(id);
-			id++;
+			inputFile.setId(new ObjectId());
+			inputFile.setFilename(f.getName());
+			System.out.println(id);
 			inputFile.save();
+			id++;
+			
 		}
 	}
 
