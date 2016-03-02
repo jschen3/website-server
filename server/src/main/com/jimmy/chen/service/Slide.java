@@ -1,32 +1,42 @@
 package com.jimmy.chen.service;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+
 import org.apache.commons.io.FileUtils;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.bson.types.ObjectId;
+import org.mongodb.morphia.Datastore;
+import org.mongodb.morphia.Morphia;
+import org.mongodb.morphia.annotations.Embedded;
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Id;
+import org.mongodb.morphia.annotations.Reference;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.util.JSON;
-@JsonIgnoreProperties({"mongoDB","mongoClient","sCollection"})
+
+@JsonIgnoreProperties({"morphia","mongoClient","datastore"})
+@Entity("slides")
 public class Slide {
 	private String title;
 	private String imagePath;
 	private String text;
-	private String id;
+	@Id
+	private ObjectId _id;
 	private boolean readMoreSlide;
+	@Reference
 	private String readMoreUrl;
+	@Embedded
 	private ArrayList<Link> links;
-	private MongoClient mongoClient = new MongoClient();
-	private DB mongoDB = mongoClient.getDB("website");
-	private DBCollection sCollection=mongoDB.getCollection("slides");
+	MongoClient mongoClient = new MongoClient("localhost",27017);
+	private Morphia morphia = new  Morphia();
+	private Datastore datastore = morphia.createDatastore(mongoClient, "website");
 	public String getTitle() {
 		return title;
 	}
@@ -51,11 +61,11 @@ public class Slide {
 	public void setLinks(ArrayList<Link> links) {
 		this.links = links;
 	}
-	public String getId() {
-		return id;
+	public ObjectId getId() {
+		return _id;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setId(ObjectId id) {
+		this._id = id;
 	}
 	public boolean isReadMoreSlide() {
 		return readMoreSlide;
@@ -106,9 +116,8 @@ public class Slide {
 				+ text + ", links=" + links + "]";
 	}
 	public void insertIntoDb(File jsonFile) throws IOException{
-		String jsonFileString=FileUtils.readFileToString(jsonFile);
-		DBObject articleObj = (DBObject) JSON.parse(jsonFileString);
-		sCollection.insert(articleObj);
+		datastore.ensureIndexes();
+		datastore.save(this);
 	}
 	
 }

@@ -13,6 +13,13 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
+import org.bson.types.ObjectId;
+import org.mongodb.morphia.Datastore;
+import org.mongodb.morphia.Morphia;
+import org.mongodb.morphia.annotations.Embedded;
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Id;
+import org.mongodb.morphia.annotations.Reference;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -23,21 +30,24 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.util.JSON;
-@JsonIgnoreProperties({"mongoDB","mongoClient","aCollection"})
+@JsonIgnoreProperties({"morphia","mongoClient","datastore"})
+@Entity("articles")
 public class Article implements Comparable<Article>{
 	private String title;
 	private String dateNumber;
 	private String dateText;
 	private String dateMonth; //change to enum maybe
 	private String blurbText;
-	private String id;
+	@Id
+	private ObjectId _id;
+	@Reference
 	private String url;
 	private int dateDay;
+	@Embedded
 	private ArrayList<ArticleComponent> articleComponents;
-	private MongoClient mongoClient = new MongoClient();
-	private DB mongoDB = mongoClient.getDB("website");
-	private DBCollection aCollection=mongoDB.getCollection("articles");
-	
+	MongoClient mongoClient = new MongoClient("localhost",27017);
+	private Morphia morphia = new  Morphia();
+	private Datastore datastore = morphia.createDatastore(mongoClient, "website");
 	public String getTitle() {
 		return title;
 	}
@@ -68,11 +78,11 @@ public class Article implements Comparable<Article>{
 	public void setText(String text) {
 		this.blurbText = text;
 	}
-	public String getId() {
-		return id;
+	public ObjectId getId() {
+		return _id;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setId(ObjectId id) {
+		this._id = id;
 	}
 	public int getDateDay() {
 		return dateDay;
@@ -111,8 +121,8 @@ public class Article implements Comparable<Article>{
 		System.out.println(TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
 		this.dateDay=(int)(long)TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
 		System.out.println(this.dateDay);
-		this.id=UUID.randomUUID().toString();
-		this.url="article.html#/?id="+this.id;
+		this._id=new ObjectId();
+		this.url="article.html#/?id="+this._id;
 		String next;
 		this.articleComponents = new ArrayList<ArticleComponent>();
 		while((next=br.readLine())!=null){
@@ -144,7 +154,7 @@ public class Article implements Comparable<Article>{
 	public String toString() {
 		return "Article [title=" + title + ", dateNumber=" + dateNumber
 				+ ", dateText=" + dateText + ", dateMonth=" + dateMonth
-				+ ", blurbText=" + blurbText + ", id=" + id + ", url=" + url
+				+ ", blurbText=" + blurbText + ", id=" + _id + ", url=" + url
 				+ ", dateDay=" + dateDay + ", articleComponents="
 				+ articleComponents + "]";
 	}
@@ -159,9 +169,9 @@ public class Article implements Comparable<Article>{
 		return  compareQuantity- this.getDateDay();
 	}
 	public void insertIntoDb(File jsonFile) throws IOException{
-		String jsonFileString=FileUtils.readFileToString(jsonFile);
-		DBObject articleObj = (DBObject) JSON.parse(jsonFileString);
-		aCollection.insert(articleObj);
+		
+		datastore.ensureIndexes();
+		datastore.save(this);
 	}
 	
 }
