@@ -19,62 +19,8 @@ public class FileProcessor {
 	public static void main(String[] args) throws Exception {
 		//removeExtraFiles();
 		processSlides();
-		//processArticles();
+		processArticles();
 		
-	}
-	public static void removeExtraFiles() throws Exception{
-		File sourceSlideFolder=new File(WebsiteConstants.SOURCE_SLIDES);
-		File sourceArticleFolder = new File(WebsiteConstants.SOURCE_ARTICLES);
-		File currentSlideFolder = new File(WebsiteConstants.CURRENT_SLIDES+File.separator+"present");
-		File currentArticleFolder = new File(WebsiteConstants.CURRENT_ARTICLES+File.separator+"present");
-		int newSlideCount = sourceSlideFolder.listFiles().length;
-		int newArticleCount = sourceArticleFolder.listFiles().length;
-		int currentSlideCount = currentSlideFolder.listFiles().length;
-		int currentArticleCount = currentArticleFolder.listFiles().length;
-		if (newSlideCount+currentSlideCount>WebsiteConstants.MAX_SLIDES){
-			removeSlideFile((newSlideCount+currentSlideCount)-WebsiteConstants.MAX_SLIDES);
-		}
-		if (newArticleCount+currentArticleCount>WebsiteConstants.MAX_ARTICLES){
-			removeArticleFiles(newArticleCount+currentArticleCount-WebsiteConstants.MAX_ARTICLES);
-		}
-		
-	}
-	public static void removeArticleFiles(int count) throws JsonParseException, JsonMappingException, IOException{
-		ArrayList<Article> articles = new ArrayList<Article>();
-		File currentArticleFolder = new File(WebsiteConstants.CURRENT_ARTICLES+File.separator+"present");
-		File[] articleFiles = currentArticleFolder.listFiles();
-		ObjectMapper mp = new ObjectMapper();
-		for (File f:articleFiles){
-			articles.add(mp.readValue(f, Article.class));
-			f.delete();
-		}
-		Collections.sort(articles);
-		for (int i=0;i<count;i++){
-			articles.remove(0);
-		}
-		for (Article b:articles){
-			String fileName = b.getTitle().replace(" ", "_").toLowerCase()+".json";
-			String filePresentLocation=currentArticleFolder.getAbsoluteFile()+File.separator+"present";
-			File resultFile = new File(filePresentLocation+File.separator+fileName);
-			mp.writeValue(resultFile, b);
-		}
-	}
-	public static void removeSlideFile(int count){
-		File currentSlideFolder = new File(WebsiteConstants.CURRENT_SLIDES+File.separator+"present");
-		File[] slideFiles = currentSlideFolder.listFiles();
-		ArrayList<Integer> randomInts = randomNumbers(slideFiles.length);
-		for (int i=0;i<count;i++){
-			slideFiles[randomInts.get(i)].delete();
-		}
-	}
-
-	public static ArrayList<Integer> randomNumbers(int max) {
-		ArrayList<Integer> list = new ArrayList<Integer>();
-		for (int i = 1; i < max; i++) {
-			list.add(new Integer(i));
-		}
-		Collections.shuffle(list);
-		return list;
 	}
 	public static void processSlides() throws IOException{
 		File sourceSlideFolder=new File(WebsiteConstants.SOURCE_SLIDES);
@@ -102,6 +48,7 @@ public class FileProcessor {
 		File currentArticleFolder = new File(WebsiteConstants.CURRENT_ARTICLES);
 		Calendar mCalendar = Calendar.getInstance();  
 		String month = mCalendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()).toLowerCase();
+		int i=0;
 		for(File articleFile:files){
 			String ext =  FilenameUtils.getExtension(articleFile.getName());
 			if (ext.equals("txt")){
@@ -121,8 +68,9 @@ public class FileProcessor {
 				article.serializeIntoFile(jsonPresentFile);
 				article.serializeIntoFile(jsonArchiveFile);
 				article.serializeIntoFile(jsonAllFile);
-			//blurbFile.delete();
+				System.out.println(i++);
 			}
+
 		}
 	}
 

@@ -15,5 +15,7 @@ public class WebsiteConstants {
 			"/Users/Jimmy/Desktop/website/slides";
 	public static final int MAX_SLIDES=6;
 	public static final int MAX_ARTICLES=10;
+	public static final String SLIDE_ARCHIVE="/Users/Jimmy/Desktop/website/archive/slides";
+	public static final String ARTICLE_ARCHIVE="/Users/Jimmy/Desktop/website/archive/articles";
 	
 }

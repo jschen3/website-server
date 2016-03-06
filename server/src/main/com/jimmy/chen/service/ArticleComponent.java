@@ -2,24 +2,21 @@ package com.jimmy.chen.service;
 
 import java.util.ArrayList;
 
-public class ArticleComponent {
-	private ArrayList<String> images;
-	private ArrayList<String> texts;
-	public ArrayList<String> getImage() {
-		return images;
+import org.mongodb.morphia.annotations.Embedded;
+	@Embedded
+	public class ArticleComponent {
+		public ArrayList<String> images;
+		public ArrayList<String> texts;
+		public ArrayList<String> getImages(){
+			return images;
+		}
+		public ArrayList<String> getTexts(){
+			return texts;
+		}
+		public void setImages(ArrayList<String> acImages) {
+			images=acImages;
+		}
+		public void setTexts(ArrayList<String> acText) {
+			texts=acText;	
+		}
 	}
-	public void setImage(ArrayList<String> images) {
-		this.images = images;
-	}
-	public ArrayList<String> getTexts() {
-		return texts;
-	}
-	public void setText(ArrayList<String> texts) {
-		this.texts = texts;
-	}
-	@Override
-	public String toString() {
-		return "ArticleComponent [images=" + images + ", texts=" + texts + "]";
-	}
-	
-}

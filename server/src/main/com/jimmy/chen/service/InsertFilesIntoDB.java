@@ -69,7 +69,8 @@ public class InsertFilesIntoDB {
 			String extension = FilenameUtils.getExtension(f.getName());
 			if (extension.equals("json")) {
 				Slide s = mapper.readValue(f, Slide.class);
-				s.insertIntoDb(f);
+				s.insertIntoDbLocal();
+				s.insertIntoDbRemote();
 			}
 		}
 
@@ -85,7 +86,8 @@ public class InsertFilesIntoDB {
 			String extension = FilenameUtils.getExtension(f.getName());
 			if (extension.equals("json")) {
 				Article a = mapper.readValue(f, Article.class);
-				a.insertIntoDb(f);
+				a.insertIntoDbLocal();
+				a.insertIntoDbRemote();
 			}
 		}
 	}

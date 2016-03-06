@@ -3,6 +3,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 
 import org.apache.commons.io.FileUtils;
@@ -34,9 +36,7 @@ public class Slide {
 	private String readMoreUrl;
 	@Embedded
 	private ArrayList<Link> links;
-	MongoClient mongoClient = new MongoClient("localhost",27017);
-	private Morphia morphia = new  Morphia();
-	private Datastore datastore = morphia.createDatastore(mongoClient, "website");
+
 	public String getTitle() {
 		return title;
 	}
@@ -80,6 +80,9 @@ public class Slide {
 		this.readMoreUrl = readMoreUrl;
 	}
 	public void processFile(File file) throws IOException{
+		Files.copy(file.toPath(), new File(WebsiteConstants.SLIDE_ARCHIVE
+				+ File.separator + file.getName()).toPath(),
+				StandardCopyOption.REPLACE_EXISTING);
 		BufferedReader br= new BufferedReader(new FileReader(file));
 		this.title=br.readLine();
 		this.imagePath=br.readLine();
@@ -95,11 +98,14 @@ public class Slide {
 			link.setText(text);
 			links.add(link);
 		}
-		if (links.size()==1 && links.get(0).getText().equals("Read More")){
+		if (links.size()==1 && links.get(0).getText().toLowerCase().equals("read more")){
 			readMoreSlide=true;
 			readMoreUrl=links.get(0).getUrl();
 			links.remove(0);
 		}
+		insertIntoDbLocal();
+		insertIntoDbRemote();
+		file.delete();
 	}
 	public String serialize() throws JsonProcessingException{
 		ObjectMapper mapper= new ObjectMapper();
@@ -115,9 +121,16 @@ public class Slide {
 		return "Slide [title=" + title + ", imagePath=" + imagePath + ", text="
 				+ text + ", links=" + links + "]";
 	}
-	public void insertIntoDb(File jsonFile) throws IOException{
-		datastore.ensureIndexes();
+	public void insertIntoDbRemote(){
+		MongoClient mongoClient = new MongoClient("52.26.239.196",27017);
+		Morphia morphia = new  Morphia();
+		Datastore datastore = morphia.createDatastore(mongoClient, "website");
 		datastore.save(this);
 	}
-	
+	public void insertIntoDbLocal(){
+		MongoClient mongoClient = new MongoClient("localhost",27017);
+		Morphia morphia = new  Morphia();
+		Datastore datastore = morphia.createDatastore(mongoClient, "website");
+		datastore.save(this);
+	}
 }
