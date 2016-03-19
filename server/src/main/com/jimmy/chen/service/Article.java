@@ -34,6 +34,7 @@ public class Article implements Comparable<Article> {
 	private String dateText;
 	private String dateMonth; // change to enum maybe
 	private String blurbText;
+	private String locator;
 	@Id
 	private String _id;
 	@Reference
@@ -125,6 +126,8 @@ public class Article implements Comparable<Article> {
 				StandardCopyOption.REPLACE_EXISTING);
 		BufferedReader br = new BufferedReader(new FileReader(file));
 		this.title = br.readLine();
+		this.locator=title.toLowerCase().replace(" ", "_");
+		System.out.println(locator);
 		this.dateNumber = br.readLine();
 		this.dateText = br.readLine();
 		this.dateMonth = br.readLine();
@@ -191,14 +194,14 @@ public class Article implements Comparable<Article> {
 	}
 
 	public void insertIntoDbRemote() {
-		MongoClient mongoClient = new MongoClient("52.26.239.196", 27017);
+		MongoClient mongoClient = new MongoClient(WebsiteConstants.REMOTE_MONGODB, 27017);
 		Morphia morphia = new Morphia();
 		Datastore datastore = morphia.createDatastore(mongoClient, "website");
 		datastore.save(this);
 	}
 
 	public void insertIntoDbLocal() {
-		MongoClient mongoClient = new MongoClient("localhost", 27017);
+		MongoClient mongoClient = new MongoClient(WebsiteConstants.LOCAL_MONGODB, 27017);
 		Morphia morphia = new Morphia();
 		Datastore datastore = morphia.createDatastore(mongoClient, "website");
 		datastore.save(this);

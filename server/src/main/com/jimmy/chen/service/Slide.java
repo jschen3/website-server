@@ -122,13 +122,13 @@ public class Slide {
 				+ text + ", links=" + links + "]";
 	}
 	public void insertIntoDbRemote(){
-		MongoClient mongoClient = new MongoClient("52.26.239.196",27017);
+		MongoClient mongoClient = new MongoClient(WebsiteConstants.REMOTE_MONGODB,27017);
 		Morphia morphia = new  Morphia();
 		Datastore datastore = morphia.createDatastore(mongoClient, "website");
 		datastore.save(this);
 	}
 	public void insertIntoDbLocal(){
-		MongoClient mongoClient = new MongoClient("localhost",27017);
+		MongoClient mongoClient = new MongoClient(WebsiteConstants.LOCAL_MONGODB,27017);
 		Morphia morphia = new  Morphia();
 		Datastore datastore = morphia.createDatastore(mongoClient, "website");
 		datastore.save(this);
