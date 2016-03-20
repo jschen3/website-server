@@ -1,4 +1,4 @@
-package com.jimmy.chen.service;
+package models;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -23,10 +23,13 @@ import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.util.JSON;
 
+import constants.WebsiteConstants;
+
 @JsonIgnoreProperties({"morphia","mongoClient","datastore"})
 @Entity("slides")
 public class Slide {
 	private String title;
+	private String locator;
 	private String imagePath;
 	private String text;
 	@Id
@@ -85,6 +88,7 @@ public class Slide {
 				StandardCopyOption.REPLACE_EXISTING);
 		BufferedReader br= new BufferedReader(new FileReader(file));
 		this.title=br.readLine();
+		this.locator=WebsiteConstants.IMAGE_APPEND+title.toLowerCase().replaceAll("\\W","");
 		this.imagePath=br.readLine();
 		this.text=br.readLine();
 		this.links=new ArrayList<Link>();

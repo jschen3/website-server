@@ -1,10 +1,14 @@
-package com.jimmy.chen.service;
+package models;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 
+import models.Article;
+
 import org.junit.Test;
+
+import constants.WebsiteConstants;
 
 public class TestArticle {
 	@Test

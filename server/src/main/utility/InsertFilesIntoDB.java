@@ -1,7 +1,10 @@
-package com.jimmy.chen.service;
+package utility;
 
 import java.io.File;
 import java.io.IOException;
+
+import models.Article;
+import models.Slide;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;

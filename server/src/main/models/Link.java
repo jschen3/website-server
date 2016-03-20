@@ -1,4 +1,4 @@
-package com.jimmy.chen.service;
+package models;
 
 import org.mongodb.morphia.annotations.Embedded;
 @Embedded

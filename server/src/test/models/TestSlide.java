@@ -1,8 +1,10 @@
-package com.jimmy.chen.service;
+package models;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+
+import models.Slide;
 
 import org.junit.Test;
 
@@ -24,8 +26,8 @@ public class TestSlide {
 	}
 	@Test
 	public void testFindCurrentSlides(){
-		File f= new File(WebsiteConstants.CURRENT_SLIDES+File.separator+"present");
-		File[] listF=f.listFiles();
-		System.out.println(Arrays.toString(listF));
+		//File f= new File(WebsiteConstants.CURRENT_SLIDES+File.separator+"present");
+		//File[] listF=f.listFiles();
+		//System.out.println(Arrays.toString(listF));
 	}
 }

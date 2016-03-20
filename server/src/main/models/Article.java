@@ -1,4 +1,4 @@
-package com.jimmy.chen.service;
+package models;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -26,7 +26,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.MongoClient;
 
-@JsonIgnoreProperties({ "morphia", "mongoClient", "datastore" })
+import constants.WebsiteConstants;
+
 @Entity("articles")
 public class Article implements Comparable<Article> {
 	private String title;
@@ -107,6 +108,14 @@ public class Article implements Comparable<Article> {
 		this.url = url;
 	}
 
+	public String getLocator() {
+		return locator;
+	}
+
+	public void setLocator(String locator) {
+		this.locator = locator;
+	}
+
 	public ArrayList<ArticleComponent> getArticleComponents() {
 		return articleComponents;
 	}
@@ -126,7 +135,7 @@ public class Article implements Comparable<Article> {
 				StandardCopyOption.REPLACE_EXISTING);
 		BufferedReader br = new BufferedReader(new FileReader(file));
 		this.title = br.readLine();
-		this.locator=title.toLowerCase().replace(" ", "_");
+		this.locator=title.toLowerCase().replaceAll("\\W","");
 		System.out.println(locator);
 		this.dateNumber = br.readLine();
 		this.dateText = br.readLine();

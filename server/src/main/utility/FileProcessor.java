@@ -1,4 +1,4 @@
-package com.jimmy.chen.service;
+package utility;
 
 import java.io.File;
 import java.io.IOException;
@@ -7,11 +7,16 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Locale;
 
+import models.Article;
+import models.Slide;
+
 import org.apache.commons.io.FilenameUtils;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import constants.WebsiteConstants;
 
 
 public class FileProcessor {

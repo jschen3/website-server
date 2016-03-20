@@ -1,4 +1,4 @@
-package com.jimmy.chen.service;
+package services;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

@@ -1,4 +1,4 @@
-package com.jimmy.chen.service;
+package constants;
 
 public class WebsiteConstants {
 //	public static final String CURRENT_ARTICLES=//"/home/ubuntu/website/server/current/articles";
@@ -17,4 +17,5 @@ public class WebsiteConstants {
 	public static final String ARTICLE_ARCHIVE="/Users/Jimmy/Desktop/website/server_and_etc/archive/articles";
 	public static final String LOCAL_MONGODB="localhost";
 	public static final String REMOTE_MONGODB="jimmy-chen.net";
+	public static final String IMAGE_APPEND="http:/localhost:8080/Website/images/";
 }
