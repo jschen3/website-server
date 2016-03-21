@@ -25,9 +25,11 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.gridfs.GridFS;
 import com.mongodb.gridfs.GridFSDBFile;
 
+import constants.WebsiteConstants;
+
 @Path("/images")
 public class ImageService {
-	MongoClient mongoClient = new MongoClient();
+	MongoClient mongoClient = new MongoClient(WebsiteConstants.REMOTE_MONGODB, 27017);
 	DB mongoDB = mongoClient.getDB("images");
 	@GET
 	@Produces({"image/png","image/jpg","image/gif"})

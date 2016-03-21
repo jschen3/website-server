@@ -90,6 +90,7 @@ public class Slide {
 		this.title=br.readLine();
 		this.locator=WebsiteConstants.IMAGE_APPEND+title.toLowerCase().replaceAll("\\W","");
 		this.imagePath=br.readLine();
+		this.imagePath=this.locator+"/"+imagePath;
 		this.text=br.readLine();
 		this.links=new ArrayList<Link>();
 		int counter=0;

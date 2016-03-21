@@ -19,6 +19,8 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.gridfs.GridFS;
 import com.mongodb.gridfs.GridFSInputFile;
 
+import constants.WebsiteConstants;
+
 public class InsertFilesIntoDB {
 	static String folderPath;
 	static String objectName;
@@ -39,30 +41,49 @@ public class InsertFilesIntoDB {
 		} else if (objectName.equals("slide")) {
 			insertSlides(folderPath);
 		} else if (objectName.equals("image")) {
-			insertImages(folderPath);
+			insertImages(folderPath, WebsiteConstants.LOCAL_MONGODB);
+			insertImages(folderPath, WebsiteConstants.REMOTE_MONGODB);
+		} else if (objectName.equals("imagefolder")){
+			insertImageFolders(folderPath, WebsiteConstants.LOCAL_MONGODB);
+			insertImageFolders(folderPath, WebsiteConstants.REMOTE_MONGODB);
 		}
 	}
 
-	private static void insertImages(String folderPath) throws IOException {
-		MongoClient mongoClient = new MongoClient("localhost", 27017);
+	private static void insertImages(String folderPath, String mongoAddress) throws IOException {
+		MongoClient mongoClient = new MongoClient(mongoAddress, 27017);
 		File folder = new File(folderPath);
 		DB mongoDB = mongoClient.getDB("images");
 		GridFS imageStore = new GridFS(mongoDB, folder.getName());
 		System.out.println(folder.getName());
 		File[] folderFiles = folder.listFiles();
-		int id = 0;
 		ObjectId o=new ObjectId();
 		for (File f : folderFiles) {
 			GridFSInputFile inputFile = imageStore.createFile(f);
 			inputFile.setId(new ObjectId());
 			inputFile.setFilename(f.getName());
-			System.out.println(id);
+			System.out.println(f.getName());
 			inputFile.save();
-			id++;
-			
 		}
 	}
-
+	private static void insertImageFolders(String folderPath, String mongoAddress) throws IOException{
+		MongoClient mongoClient = new MongoClient(mongoAddress, 27017);
+		File folder = new File(folderPath);
+		DB mongoDB = mongoClient.getDB("images");
+		File[] insideFolders = folder.listFiles();
+		for (File imageFolder:insideFolders){
+			if (imageFolder.isDirectory()){
+				GridFS imageStore = new GridFS(mongoDB, imageFolder.getName());
+				File[] imageFolderFiles = imageFolder.listFiles();	
+				for (File f:imageFolderFiles){
+					GridFSInputFile inputFile = imageStore.createFile(f);
+					inputFile.setId(new ObjectId());
+					inputFile.setFilename(f.getName());
+					System.out.println(f.getName());
+					inputFile.save();
+				}
+			}
+		}
+	}
 	private static void insertSlides(String folderPath)
 			throws JsonParseException, JsonMappingException, IOException {
 		File folder = new File(folderPath);

@@ -16,9 +16,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.MongoClient;
 
+import constants.WebsiteConstants;
+
 @Path("/slides")
 public class MongoDBSlideService {
-	MongoClient mongoClient = new MongoClient("localhost",27017);
+	MongoClient mongoClient = new MongoClient(WebsiteConstants.REMOTE_MONGODB,27017);
 	private Morphia morphia = new  Morphia();
 	private Datastore datastore = morphia.createDatastore(mongoClient, "website");
 	@GET

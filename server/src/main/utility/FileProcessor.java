@@ -22,8 +22,8 @@ import constants.WebsiteConstants;
 public class FileProcessor {
 	static WebsiteConstants wc = new WebsiteConstants();
 	public static void main(String[] args) throws Exception {
-		//processSlides();
-		processArticles();
+		processSlides();
+		//processArticles();
 		
 	}
 	public static void processSlides() throws IOException{
