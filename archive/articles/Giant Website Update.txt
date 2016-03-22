@@ -1,0 +1,15 @@
+Giant Website Update
+03-21-2016
+March 21, 2016
+march
+Notice anything different recently about my website. Nope, I guess not much changed visually but internally I made a whopping gigantic change. Lets go over those changes and why I think those internal changes are awesome.
+Notice anything different recently about my website. Nope, I guess not much changed visually but internally I made a whopping gigantic change. Lets go over those changes and why I think those internal changes are awesome.
+I made 3 major changes and I suppose 2 of those changes are roughly in the same category and deal with the same new technology. Those changes are: One moving the entire webpage to digital ocean; Two organizing articles and slides in mongodb; and lastly 3 moving all the images into the same place in a mongodb structure once again. Lets go over each of these changes starting with digital ocean.
+###
+image:digitalocean.png
+Previously my website was hosted using AWS, which is amazons web hosting service. AWS is an awesome service and definetely the most popular web hoster for enterprise applications. Unfortunately though AWS is also more expensive. So I decided to move my website to digital ocean. Rather than costing $12 per month to host it is only 5 on digital ocean. Sorry, for the small preformance downgrade. 
+###
+image:smile.jpg
+image:mongodb.png
+Second I reorganized my entire website to use mongodb. Now rather than storing all my articles and everything on random places in the file system I store all the info into a database. The database is mongodb which I suppose does the same thing with its internal structure but using MongoDB allows me explore new technology and allow easier updating. Rather than having to create the file on my host machine and then copying it to the same place on website server, I can just immediately store the file into both databases. Retrieval is also easier, I can just make a mongodb query. 
+The third change, I think is the coolest of them all. That change is the storing all the images in the database as well. Remember the common broken image links, well those should be gone now. I now store the images in their own mongo database and associate them automatically with their article so the images and their retrieval is much smoother. Hopefully these changes allow me to update my website more smoothly and quickly and allow me to grow it more. :) 

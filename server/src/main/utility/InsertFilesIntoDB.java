@@ -34,22 +34,22 @@ public class InsertFilesIntoDB {
 		}
 		folderPath = args[0];
 		objectName = args[1];
-
+		InsertFilesIntoDB insert = new InsertFilesIntoDB();
 		ObjectMapper mapper = new ObjectMapper();
 		if (objectName.equals("article")) {
-			insertArticles(folderPath);
+			insert.insertArticles(folderPath);
 		} else if (objectName.equals("slide")) {
-			insertSlides(folderPath);
+			insert.insertSlides(folderPath);
 		} else if (objectName.equals("image")) {
-			insertImages(folderPath, WebsiteConstants.LOCAL_MONGODB);
-			insertImages(folderPath, WebsiteConstants.REMOTE_MONGODB);
+			insert.insertImages(folderPath, WebsiteConstants.LOCAL_MONGODB);
+			insert.insertImages(folderPath, WebsiteConstants.REMOTE_MONGODB);
 		} else if (objectName.equals("imagefolder")){
-			insertImageFolders(folderPath, WebsiteConstants.LOCAL_MONGODB);
-			insertImageFolders(folderPath, WebsiteConstants.REMOTE_MONGODB);
+			insert.insertImageFolders(folderPath, WebsiteConstants.LOCAL_MONGODB);
+			insert.insertImageFolders(folderPath, WebsiteConstants.REMOTE_MONGODB);
 		}
 	}
 
-	private static void insertImages(String folderPath, String mongoAddress) throws IOException {
+	public void insertImages(String folderPath, String mongoAddress) throws IOException {
 		MongoClient mongoClient = new MongoClient(mongoAddress, 27017);
 		File folder = new File(folderPath);
 		DB mongoDB = mongoClient.getDB("images");
@@ -65,7 +65,7 @@ public class InsertFilesIntoDB {
 			inputFile.save();
 		}
 	}
-	private static void insertImageFolders(String folderPath, String mongoAddress) throws IOException{
+	public void insertImageFolders(String folderPath, String mongoAddress) throws IOException{
 		MongoClient mongoClient = new MongoClient(mongoAddress, 27017);
 		File folder = new File(folderPath);
 		DB mongoDB = mongoClient.getDB("images");
@@ -84,7 +84,7 @@ public class InsertFilesIntoDB {
 			}
 		}
 	}
-	private static void insertSlides(String folderPath)
+	public void insertSlides(String folderPath)
 			throws JsonParseException, JsonMappingException, IOException {
 		File folder = new File(folderPath);
 		File[] folderFiles = folder.listFiles();
@@ -100,7 +100,7 @@ public class InsertFilesIntoDB {
 
 	}
 
-	private static void insertArticles(String folderPath)
+	public void insertArticles(String folderPath)
 			throws JsonParseException, JsonMappingException, IOException {
 		File folder = new File(folderPath);
 

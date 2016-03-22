@@ -13,9 +13,12 @@ public class WebsiteConstants {
 			"/Users/Jimmy/Desktop/website/server_and_etc/projects";
 	public static final String SOURCE_SLIDES=
 			"/Users/Jimmy/Desktop/website/server_and_etc/slides";
+	public static final String SOURCE_IMAGES=
+			"/Users/Jimmy/Desktop/website/server_and_etc/images";
 	public static final String SLIDE_ARCHIVE="/Users/Jimmy/Desktop/website/server_and_etc/archive/slides";
 	public static final String ARTICLE_ARCHIVE="/Users/Jimmy/Desktop/website/server_and_etc/archive/articles";
+	public static final String IMAGE_ARCHIVE="/Users/Jimmy/Desktop/website/server_and_etc/archive/imageFolders";
 	public static final String LOCAL_MONGODB="localhost";
 	public static final String REMOTE_MONGODB="jimmy-chen.net";
-	public static final String IMAGE_APPEND="http:/localhost:8080/Website/images/";
+	public static final String IMAGE_APPEND="http://jimmy-chen.net:8080/Website/images/";
 }

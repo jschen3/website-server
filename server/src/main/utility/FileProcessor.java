@@ -10,6 +10,7 @@ import java.util.Locale;
 import models.Article;
 import models.Slide;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 
 import com.fasterxml.jackson.core.JsonParseException;
@@ -22,9 +23,23 @@ import constants.WebsiteConstants;
 public class FileProcessor {
 	static WebsiteConstants wc = new WebsiteConstants();
 	public static void main(String[] args) throws Exception {
-		processSlides();
+		//processSlides();
 		//processArticles();
-		
+		processImages();
+	}
+	public static void processImages() throws IOException {
+		InsertFilesIntoDB insert = new InsertFilesIntoDB();
+		File sourceImageFolder = new File(WebsiteConstants.SOURCE_IMAGES);
+		File archiveImageFolder = new File(WebsiteConstants.IMAGE_ARCHIVE);
+		File[] sourceImageFiles = sourceImageFolder.listFiles();
+		for(File f:sourceImageFiles){
+			if (f.isDirectory()){
+				FileUtils.copyDirectory(f, archiveImageFolder);
+				insert.insertImages(f.getAbsolutePath(), WebsiteConstants.LOCAL_MONGODB);
+				insert.insertImages(f.getAbsolutePath(), WebsiteConstants.REMOTE_MONGODB);
+				FileUtils.deleteDirectory(f);
+			}
+		}
 	}
 	public static void processSlides() throws IOException{
 		File sourceSlideFolder=new File(WebsiteConstants.SOURCE_SLIDES);
