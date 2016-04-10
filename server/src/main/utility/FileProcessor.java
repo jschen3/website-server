@@ -27,7 +27,7 @@ public class FileProcessor {
 	public static void main(String[] args) throws Exception {
 		//processSlides();
 		//processArticles();
-		//processImages();
+		processImages();
 		proccessProjects();
 	}
 	public static void proccessProjects() throws IOException, ParseException {

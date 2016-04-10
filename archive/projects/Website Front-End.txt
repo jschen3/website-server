@@ -1,0 +1,7 @@
+Website Front-End
+04-10-2016
+website.jpeg
+https://github.com/jschen3/website-frontend
+
+html5, angular, bootstrap, model view controller, javascript, json
+This is the front end of this very website. So of course I'm making it one of my projects and displaying the code here. This website is also good example on how to use the model view controller framework. I also like how the models and json map to the Front-end GUI. 

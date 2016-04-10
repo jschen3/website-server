@@ -1,0 +1,8 @@
+Simple Catalog
+03-07-2016
+catalog.jpg
+https://github.com/jschen3/simple_catalog
+true
+jimmy-chen.net/projects/simple_catalog/index.html
+angular, bootstrap, html5, model view controller, website
+I adapted a coding challenge to a project to display on github and the model view controller framework. I think this project really shows what you can do with angular and bootstrap to build a pretty user friendly framework. Additionally I feel the code is simple and clean proper use of each piece of angular to build the website. Also the services can be quickly adapted to make it real catalog. 

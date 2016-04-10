@@ -1,0 +1,7 @@
+Website Server
+04-09-2016
+server.jpeg
+https://github.com/jschen3/website-server
+
+java, jersey, mongodb, morphia, Jackson Json Conversion, REST
+This is the backend of my website. Its pretty simple a bunch of utility methods to insert the documents into the mongodb and then some rest services to display the appropriate json object and documents. 
