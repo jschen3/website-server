@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.io.FileUtils;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
@@ -130,9 +131,9 @@ public class Article implements Comparable<Article> {
 	}
 
 	public void processFile(File file) throws IOException, ParseException {
-		Files.copy(file.toPath(), new File(WebsiteConstants.ARTICLE_ARCHIVE
-				+ File.separator + file.getName()).toPath(),
-				StandardCopyOption.REPLACE_EXISTING);
+		//FileUtils.copyFile(file.getAbsolutePath(), new File(WebsiteConstants.ARTICLE_ARCHIVE
+			//	+ File.separator + file.getName());
+		FileUtils.copyFile(file, new File(WebsiteConstants.ARTICLE_ARCHIVE + File.separator + file.getName()));
 		BufferedReader br = new BufferedReader(new FileReader(file));
 		this.title = br.readLine();
 		this.locator=title.toLowerCase().replaceAll("\\W","");

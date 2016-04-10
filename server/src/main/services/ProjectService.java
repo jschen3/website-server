@@ -1,0 +1,33 @@
+package services;
+
+import java.util.List;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+import org.mongodb.morphia.Datastore;
+import org.mongodb.morphia.Morphia;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mongodb.MongoClient;
+
+import constants.WebsiteConstants;
+import models.Project;
+
+@Path("/projects")
+public class ProjectService {
+	MongoClient mongoClient = new MongoClient(WebsiteConstants.LOCAL_MONGODB, 27017);
+	private Morphia morphia = new Morphia();
+	private Datastore datastore = morphia.createDatastore(mongoClient, "website");
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public String showProjects() throws JsonProcessingException{
+		List<Project> projects = datastore.createQuery(Project.class).asList();
+		ObjectMapper mp = new ObjectMapper();
+		return mp.writerWithDefaultPrettyPrinter().writeValueAsString(projects);
+	}
+	
+}

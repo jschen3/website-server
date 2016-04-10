@@ -2,12 +2,14 @@ package utility;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Locale;
 
 import models.Article;
+import models.Project;
 import models.Slide;
 
 import org.apache.commons.io.FileUtils;
@@ -25,7 +27,19 @@ public class FileProcessor {
 	public static void main(String[] args) throws Exception {
 		//processSlides();
 		//processArticles();
-		processImages();
+		//processImages();
+		proccessProjects();
+	}
+	public static void proccessProjects() throws IOException, ParseException {
+		File sourceProjectFolder = new File(WebsiteConstants.SOURCE_PROJECTS);
+		File[] sourceProjectFiles = sourceProjectFolder.listFiles();
+		for (File f:sourceProjectFiles){
+			Project p =new Project();
+			String ext =  FilenameUtils.getExtension(f.getName());
+			if (ext.equals("txt")){
+				p.processFile(f);
+			}
+		}
 	}
 	public static void processImages() throws IOException {
 		InsertFilesIntoDB insert = new InsertFilesIntoDB();
@@ -34,10 +48,10 @@ public class FileProcessor {
 		File[] sourceImageFiles = sourceImageFolder.listFiles();
 		for(File f:sourceImageFiles){
 			if (f.isDirectory()){
-				FileUtils.copyDirectory(f, archiveImageFolder);
-				insert.insertImages(f.getAbsolutePath(), WebsiteConstants.LOCAL_MONGODB);
-				insert.insertImages(f.getAbsolutePath(), WebsiteConstants.REMOTE_MONGODB);
-				FileUtils.deleteDirectory(f);
+				File newDir = new File(WebsiteConstants.IMAGE_ARCHIVE+File.separator+f.getName());
+				insert.insertImages(f.getAbsolutePath(), WebsiteConstants.LOCAL_MONGODB, newDir);
+				insert.insertImages(f.getAbsolutePath(), WebsiteConstants.REMOTE_MONGODB, newDir);
+				f.delete();
 			}
 		}
 	}

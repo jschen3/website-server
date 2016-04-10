@@ -18,7 +18,9 @@ public class WebsiteConstants {
 	public static final String SLIDE_ARCHIVE="/Users/Jimmy/Desktop/website/server_and_etc/archive/slides";
 	public static final String ARTICLE_ARCHIVE="/Users/Jimmy/Desktop/website/server_and_etc/archive/articles";
 	public static final String IMAGE_ARCHIVE="/Users/Jimmy/Desktop/website/server_and_etc/archive/imageFolders";
+	public static final String PROJECT_ARCHIVE="/Users/Jimmy/Descktop/website/server_and_etc/archive/projects";
 	public static final String LOCAL_MONGODB="localhost";
 	public static final String REMOTE_MONGODB="jimmy-chen.net";
 	public static final String IMAGE_APPEND="http://jimmy-chen.net:8080/Website/images/";
+	
 }

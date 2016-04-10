@@ -41,15 +41,15 @@ public class InsertFilesIntoDB {
 		} else if (objectName.equals("slide")) {
 			insert.insertSlides(folderPath);
 		} else if (objectName.equals("image")) {
-			insert.insertImages(folderPath, WebsiteConstants.LOCAL_MONGODB);
-			insert.insertImages(folderPath, WebsiteConstants.REMOTE_MONGODB);
+			//insert.insertImages(folderPath, WebsiteConstants.LOCAL_MONGODB);
+			//insert.insertImages(folderPath, WebsiteConstants.REMOTE_MONGODB);
 		} else if (objectName.equals("imagefolder")){
 			insert.insertImageFolders(folderPath, WebsiteConstants.LOCAL_MONGODB);
 			insert.insertImageFolders(folderPath, WebsiteConstants.REMOTE_MONGODB);
 		}
 	}
 
-	public void insertImages(String folderPath, String mongoAddress) throws IOException {
+	public void insertImages(String folderPath, String mongoAddress, File archiveFolder) throws IOException {
 		MongoClient mongoClient = new MongoClient(mongoAddress, 27017);
 		File folder = new File(folderPath);
 		DB mongoDB = mongoClient.getDB("images");
@@ -63,6 +63,7 @@ public class InsertFilesIntoDB {
 			inputFile.setFilename(f.getName());
 			System.out.println(f.getName());
 			inputFile.save();
+			FileUtils.copyFileToDirectory(f, archiveFolder, false);
 		}
 	}
 	public void insertImageFolders(String folderPath, String mongoAddress) throws IOException{
