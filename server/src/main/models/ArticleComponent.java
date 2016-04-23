@@ -19,4 +19,9 @@ import org.mongodb.morphia.annotations.Embedded;
 		public void setTexts(ArrayList<String> acText) {
 			texts=acText;	
 		}
+		@Override
+		public String toString() {
+			return "ArticleComponent [images=" + images + ", texts=" + texts + "]";
+		}
+		
 	}

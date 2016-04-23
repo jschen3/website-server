@@ -11,6 +11,7 @@ import java.util.Locale;
 import models.Article;
 import models.Project;
 import models.Slide;
+import models.Teaser;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -23,13 +24,23 @@ import constants.WebsiteConstants;
 
 
 public class FileProcessor {
+	static Teaser teaser = new Teaser();
 	static WebsiteConstants wc = new WebsiteConstants();
 	public static void main(String[] args) throws Exception {
 		//processSlides();
 		//processArticles();
-		processImages();
-		proccessProjects();
+		//processImages();
+		//proccessProjects();
+		processTeasers();
 	}
+	private static void processTeasers() throws IOException, ParseException {
+		File p = new File(WebsiteConstants.SOURCE_PROBLEM+File.separator+"TheCoinChanger.txt");
+		File s = new File(WebsiteConstants.SOURCE_SOLUTION+File.separator+"TheCoinChanger.txt");
+		teaser.processFiles(p, s);
+		System.out.println(teaser);
+		
+	}
+
 	public static void proccessProjects() throws IOException, ParseException {
 		File sourceProjectFolder = new File(WebsiteConstants.SOURCE_PROJECTS);
 		File[] sourceProjectFiles = sourceProjectFolder.listFiles();
