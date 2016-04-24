@@ -57,6 +57,12 @@ public class Teaser {
 	public void setDate(String date) {
 		this.date = date;
 	}
+	public String getDateText() {
+		return dateText;
+	}
+	public void setDateText(String dateText) {
+		this.dateText = dateText;
+	}
 	public int getDateDay() {
 		return dateDay;
 	}
