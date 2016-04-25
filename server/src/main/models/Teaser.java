@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
@@ -110,6 +112,7 @@ public class Teaser {
 		FileUtils.copyFile(solutionFile, new File(WebsiteConstants.TEASER_ARCHIVE + File.separator +problemFile.getName()));
 		parseProblemFile(problemFile);
 		parseSolutionFile(solutionFile);
+		
 		insertIntoDbLocal();
 		//insertIntoDbRemote();
 	}
@@ -163,21 +166,22 @@ public class Teaser {
 					content.append(line);
 					content.append("\n");
 				}
-				SolutionComponent s = new SolutionComponent("code",position,content.toString());
+				SolutionComponent s = new SolutionComponent(2,position,content.toString());
 				solution.add(s);
 			}
 			else if (sNext.equals("image:")) {
 					int position=Integer.parseInt(br2.readLine());
 					String content=br2.readLine();
-					SolutionComponent s = new SolutionComponent("image",position, content);
+					SolutionComponent s = new SolutionComponent(1,position, content);
 					solution.add(s);
 			}
 			else if (sNext.equals("text:")){
 						int position=Integer.parseInt(br2.readLine());
 						String content=br2.readLine();
-						SolutionComponent s = new SolutionComponent("text",position,content);
+						SolutionComponent s = new SolutionComponent(0,position,content);
 						solution.add(s);
 			}
+			Collections.sort(solution);
 		}	
 	}
 	public void insertIntoDbRemote() {

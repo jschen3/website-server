@@ -216,4 +216,5 @@ public class Article implements Comparable<Article> {
 		Datastore datastore = morphia.createDatastore(mongoClient, "website");
 		datastore.save(this);
 	}
+
 }

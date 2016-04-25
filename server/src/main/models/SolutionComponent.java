@@ -1,15 +1,14 @@
 package models;
 import org.mongodb.morphia.annotations.Embedded;
-import java.util.ArrayList;
 @Embedded
-public class SolutionComponent {
-	String type;
+public class SolutionComponent implements Comparable<SolutionComponent>{
+	int type;
 	int position;
 	String content;
-	public String getType() {
+	public int getType() {
 		return type;
 	}
-	public void setType(String type) {
+	public void setType(int type) {
 		this.type = type;
 	}
 	public int getPosition() {
@@ -26,7 +25,7 @@ public class SolutionComponent {
 	}
 	public SolutionComponent(){
 	}
-	public SolutionComponent(String type, int position, String content){
+	public SolutionComponent(int type, int position, String content){
 		this.type=type;
 		this.position=position;
 		this.content=content;
@@ -34,5 +33,10 @@ public class SolutionComponent {
 	@Override
 	public String toString() {
 		return "SolutionComponent [type=" + type + ", position=" + position + ", content=" + content + "]";
+	}
+	@Override
+	public int compareTo(SolutionComponent o) {
+		int compareQuantity=o.getPosition();
+		return this.getPosition()-compareQuantity;
 	}
 }
