@@ -108,11 +108,12 @@ public class Teaser {
 		this.solution = solution;
 	}
 	public void processFiles(File problemFile, File solutionFile) throws IOException, ParseException{
-		FileUtils.copyFile(problemFile, new File(WebsiteConstants.TEASER_ARCHIVE + File.separator +problemFile.getName()));
-		FileUtils.copyFile(solutionFile, new File(WebsiteConstants.TEASER_ARCHIVE + File.separator +problemFile.getName()));
+		FileUtils.copyFile(problemFile, new File(WebsiteConstants.PROBLEM_ARCHIVE + File.separator +problemFile.getName()));
+		FileUtils.copyFile(solutionFile, new File(WebsiteConstants.SOLUTION_ARCHIVE + File.separator +problemFile.getName()));
 		parseProblemFile(problemFile);
 		parseSolutionFile(solutionFile);
-		
+		FileUtils.deleteQuietly(problemFile);
+		FileUtils.deleteQuietly(solutionFile);
 		insertIntoDbLocal();
 		//insertIntoDbRemote();
 	}
@@ -139,7 +140,7 @@ public class Teaser {
 			ArrayList<String> acImages = new ArrayList<String>();
 			ArrayList<String> acText = new ArrayList<String>();
 			while (next != null&& !next.equals("###")) {
-				if (next.substring(0, 6).equals("image:")) {
+				if (next.length()>7 &&next.substring(0, 6).equals("image:")) {
 					String imagePath = next.substring(6);
 					acImages.add(imagePath);
 				} else {

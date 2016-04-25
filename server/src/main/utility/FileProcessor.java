@@ -34,11 +34,22 @@ public class FileProcessor {
 		processTeasers();
 	}
 	private static void processTeasers() throws IOException, ParseException {
-		File p = new File(WebsiteConstants.SOURCE_PROBLEM+File.separator+"TheCoinChanger.txt");
-		File s = new File(WebsiteConstants.SOURCE_SOLUTION+File.separator+"TheCoinChanger.txt");
-		teaser.processFiles(p, s);
-		System.out.println(teaser);
-		
+		File sourceTeaserFolder = new File(WebsiteConstants.SOURCE_PROBLEM);
+		File sourceSolutionFolder = new File(WebsiteConstants.SOURCE_SOLUTION);
+		File [] sourceTeasers = sourceTeaserFolder.listFiles();
+		File [] sourceSolutions = sourceSolutionFolder.listFiles();
+		for(File teaserFile:sourceTeasers){
+			if (FilenameUtils.getExtension(teaserFile.getName()).equals("txt")){
+				Teaser t = new Teaser();
+				t.parseProblemFile(teaserFile);
+				for(File solutionFile:sourceSolutions){
+					if (solutionFile.getName().equals(t.getLocator()+".txt")){
+						t.processFiles(teaserFile, solutionFile);
+						System.out.println(teaser);
+					}
+				}
+			}
+		}
 	}
 
 	public static void proccessProjects() throws IOException, ParseException {

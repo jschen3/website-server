@@ -19,7 +19,8 @@ public class WebsiteConstants {
 	public static final String ARTICLE_ARCHIVE="/Users/Jimmy/Desktop/website/website-server/archive/articles";
 	public static final String IMAGE_ARCHIVE="/Users/Jimmy/Desktop/website/website-server/archive/imageFolders";
 	public static final String PROJECT_ARCHIVE="/Users/Jimmy/Descktop/website/website-server/archive/projects";
-	public static final String TEASER_ARCHIVE="/Users/Jimmy/Desktop/website/website-server/archive/teasers";
+	public static final String PROBLEM_ARCHIVE="/Users/Jimmy/Desktop/website/website-server/archive/teasers/problems";
+	public static final String SOLUTION_ARCHIVE="/Users/Jimmy/Desktop/website/website-server/archive/teasers/solutions";
 	public static final String LOCAL_MONGODB="localhost";
 	public static final String REMOTE_MONGODB="jimmy-chen.net";
 	public static final String IMAGE_APPEND="http://jimmy-chen.net:8080/Website/images/";
