@@ -115,7 +115,7 @@ public class Teaser {
 		FileUtils.deleteQuietly(problemFile);
 		FileUtils.deleteQuietly(solutionFile);
 		insertIntoDbLocal();
-		//insertIntoDbRemote();
+		insertIntoDbRemote();
 	}
 	public void parseProblemFile(File problemFile) throws IOException, ParseException{
 		BufferedReader br = new BufferedReader(new FileReader(problemFile));
