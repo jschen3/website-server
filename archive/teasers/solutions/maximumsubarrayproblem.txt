@@ -1,0 +1,59 @@
+text:
+0
+The brute force method is simple enough just try every subarray. Start with the whole array, then shrink the array to the whole array minus the last element until you reach the first index. Then start at the second index to the last and do the same thing. For an example with an array with 5 numbers. First 0-5 then 0-4..0-0 then 1-5,1-4...
+code:
+1
+public static ArrayList<Integer> maxSubArray2(ArrayList<Integer> originalArray){
+	ArrayList<Integer> maxArray=new ArrayList<Integer>();
+	int maxSum = originalArray.get(0);
+	maxArray.add(originalArray.get(0));
+	for (int i=0;i<originalArray.size();i++){
+		for (int endPoint=originalArray.size()-1;endPoint>=i;endPoint--){
+			int sum=0; 
+			ArrayList<Integer> subArray = new ArrayList<Integer>();
+			for (int a=i;a<endPoint;a++){
+				sum+=originalArray.get(a);
+				subArray.add(originalArray.get(a));
+			}
+			if (maxSum<sum){
+				maxSum=sum;
+				maxArray = (ArrayList<Integer>)subArray.clone();
+			}
+		}
+	}
+	return maxArray;
+}
+###
+text:
+2
+The other way requires a lot of thinking. Pay special attention to how the maximum sub array changes if another number is added. There are 3 possibilites. The maximum sub array stays the same as adding the number doesn't create a larger sub array, the maximum sub array grows larger and includes the number ,or the maximum sub array becomes that one number. From these 3 possibilities what cases lead to each scenario. How does the current max sum play into this? Did you get it?
+text:
+3
+Next lets look at the maximum sum at this point or maxHere. Lets say the sequence is 4,-2,3,1. maxHere is is maximum sequence after each new number is add or the max including this number. So the maxHere after the -2 is 2. As the sequence has to include the -2.(The maxHere is not the same as the maximumsubarray. It is simply the maximum subarray including the number reached.) The maxHere allows cases where adding the next number creates a larger maximum sub array as the maxHere is still positive. After maxHere is calculated it needs to compared and checked if it is the maximumsubarray as a whole. If it is save it and use it for future compares. If it is not perserve and continue. 
+code:
+4
+public static ArrayList<Integer> maxSubArray(ArrayList<Integer> originalArray) {
+	ArrayList<Integer> currentArray = new ArrayList<Integer>();
+	ArrayList<Integer> maxArray = new ArrayList<Integer>();
+	int maxHere = originalArray.get(0);
+	int maxSum = originalArray.get(0);
+	currentArray.add(originalArray.get(0));
+	maxArray.add(originalArray.get(0));
+	for (int i = 1; i < originalArray.size(); i++) {
+		if (originalArray.get(i) > maxHere + originalArray.get(i)) {
+			maxHere = originalArray.get(i);
+			currentArray = new ArrayList<Integer>();
+			currentArray.add(originalArray.get(i));
+		} else {
+			maxHere = maxHere + originalArray.get(i);
+			currentArray.add(originalArray.get(i));
+		}
+		if (maxSum < maxHere) {
+			maxSum = maxHere;
+			maxArray = (ArrayList<Integer>) currentArray.clone();
+		} else {
+			continue;
+		}
+	}
+	return maxArray;
+}
