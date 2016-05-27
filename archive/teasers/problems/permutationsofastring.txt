@@ -1,0 +1,6 @@
+Permutations of a String
+May 20, 2016
+05 20 2016
+Permutations of a string is another common question that is asked in interviews. It is simple once you figure out the right way to think about it using recursion. Try a small string first.
+recursion, loops, simpler examples
+Given a String find all permutations of that string. A permutation is using all the letters of the string in any order. For an example for the string cat. The permutations will be cat, cta, atc, act, tac,tca. For simplicity lets first allow duplicates that occur in cases which letters repeat. 

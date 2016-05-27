@@ -1,0 +1,71 @@
+text:
+0
+The trick of the question is considering the recursion with a small example. Lets start with abc. How do we do it? I first pick one of the letters then build from there. In this case if I pick a as the first letter. The only combinations of of the remaining letter are bc and cb. So the combinations in sum are abc, and acb. Next how to we get the remaining permutations. We do the same we pick a different letter and permute the remaing. In this b is the first letter permuting the remaining we get bac and bca. 
+text:
+1
+Next consider can we build a recursion of of this idea. As with more letters we need to get down to the 3 letter case. With 4 letters we need to pick a letter and permute the remaining 3 and likewise do this with all the letters just we did with 3 characters. 
+text:
+2
+After seeing this recursion and step the code follows simply. 
+text:
+3
+Lets start with a runner and some utility functions
+code:
+4
+public static void main(String args[]){
+	ArrayList<String> permute = new ArrayList<String>();
+	Scanner sc = new Scanner(System.in);
+	String permuteString=sc.next();
+	permutations(permuteString,"",permute);
+	System.out.println(permute);
+	System.out.println(permute.size());
+}
+public static String removeCharAt(String s, int position){
+	if (position==0){
+		return s.substring(1);
+	}
+	else{
+		return s.substring(0, position)+s.substring(position+1);
+	}
+}
+###
+text:
+4
+If its not clear the removeChar simply removes a character at a location from a string and returns the string with the character removed.
+text:
+5
+Here are the base cases.
+code:
+6
+if (left.length()==1){
+	permutations.add(left);
+	return;
+}
+if (left.length()==2){
+	permutations.add(current.concat(left.charAt(0)+"").concat(left.charAt(1)+""));
+	permutations.add(current.concat(left.charAt(1)+"").concat(left.charAt(0)+""));
+	return;
+}
+###
+text:
+7
+Lastly the whole recursive function
+code:
+8
+public static void permutations(String left, String current, ArrayList<String> permutations){
+	if (left.length()==1){
+		permutations.add(left);
+		return;
+	}
+	if (left.length()==2){
+		permutations.add(current.concat(left.charAt(0)+"").concat(left.charAt(1)+""));
+		permutations.add(current.concat(left.charAt(1)+"").concat(left.charAt(0)+""));
+		return;
+	}
+	for (int i=0;i<left.length();i++){
+		String newLeft = removeCharAt(left, i);
+		String newCurrent = current.concat(left.charAt(i)+"");
+		permutations(newLeft, newCurrent, permutations);	
+	}
+	
+}

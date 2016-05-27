@@ -27,10 +27,10 @@ public class FileProcessor {
 	static Teaser teaser = new Teaser();
 	static WebsiteConstants wc = new WebsiteConstants();
 	public static void main(String[] args) throws Exception {
-		//processSlides();
-		//processArticles();
-		//processImages();
-		//proccessProjects();
+		processSlides();
+		processArticles();
+		processImages();
+		proccessProjects();
 		processTeasers();
 	}
 	private static void processTeasers() throws IOException, ParseException {

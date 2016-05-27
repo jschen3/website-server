@@ -2,6 +2,7 @@ package utility;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 
 import models.Article;
 import models.Slide;
@@ -59,8 +60,11 @@ public class InsertFilesIntoDB {
 		ObjectId o=new ObjectId();
 		for (File f : folderFiles) {
 			GridFSInputFile inputFile = imageStore.createFile(f);
+			String contentType=Files.probeContentType(f.toPath());
 			inputFile.setId(new ObjectId());
 			inputFile.setFilename(f.getName());
+			inputFile.setContentType(contentType);
+			System.out.println(contentType);
 			System.out.println(f.getName());
 			inputFile.save();
 			FileUtils.copyFileToDirectory(f, archiveFolder, false);
