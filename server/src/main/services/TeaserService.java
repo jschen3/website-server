@@ -35,14 +35,14 @@ public class TeaserService {
 	@GET
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getArticle(@PathParam("id") String id) throws JsonProcessingException{
+	public String getTeasers(@PathParam("id") String id) throws JsonProcessingException{
 		Query<Teaser> query = datastore.createQuery(Teaser.class);
-		List<Teaser> articles=query.filter("_id ==", id).asList();
+		List<Teaser> teaser=query.filter("_id ==", id).asList();
 		ObjectMapper mp = new ObjectMapper();
-		if (articles.size()<1)
+		if (teaser.size()<1)
 			return "article not found";
 		else{
-			Teaser a=articles.get(0);
+			Teaser a=teaser.get(0);
 			return mp.writerWithDefaultPrettyPrinter().writeValueAsString(a);
 		}
 	}

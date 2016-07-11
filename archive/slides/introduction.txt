@@ -1,7 +1,7 @@
 Introduction
 intro-picture.jpg
 My name is Jimmy Chen and welcome to my website. I am an enterprising software developer. I will be posting my opinions and projects on this page. Recently I have been expanding my data analysis techniques and working on web techniques through this website and etc. To learn more about me click the about me button. To find my resume click the resume button.
-resume.html
+#/resume
 Resume
-aboutme.html
+#/aboutme
 About Me

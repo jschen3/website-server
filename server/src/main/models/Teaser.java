@@ -131,8 +131,8 @@ public class Teaser {
 		long diff=teaserDate.getTime()-jan1.getTime();
 		this.dateDay = (int) (long) TimeUnit.DAYS.convert(diff,
 				TimeUnit.MILLISECONDS);
-		this._id=UUID.randomUUID().toString();
-		this.url="teaser.html#/?id=" + this._id;
+		this._id=UUID.randomUUID().toString().substring(0,10);
+		this.url="#/teaser/" + this._id;
 		this.problem = new ArrayList<ArticleComponent>();
 		String next;
 		while ((next = br.readLine()) != null) {

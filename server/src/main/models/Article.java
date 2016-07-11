@@ -151,8 +151,8 @@ public class Article implements Comparable<Article> {
 		this.dateDay = (int) (long) TimeUnit.DAYS.convert(diff,
 				TimeUnit.MILLISECONDS);
 		System.out.println(this.dateDay);
-		this._id = UUID.randomUUID().toString();
-		this.url = "article.html#/?id=" + this._id;
+		this._id = UUID.randomUUID().toString().substring(0,10);
+		this.url = "#/articles/" + this._id;
 		String next;
 		this.articleComponents = new ArrayList<ArticleComponent>();
 		while ((next = br.readLine()) != null) {
