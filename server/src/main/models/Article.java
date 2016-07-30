@@ -10,6 +10,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Scanner;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -32,18 +34,15 @@ import constants.WebsiteConstants;
 @Entity("articles")
 public class Article implements Comparable<Article> {
 	private String title;
-	private String dateNumber;
-	private String dateText;
-	private String dateMonth; // change to enum maybe
+	private String date;
 	private String blurbText;
-	private String locator;
 	@Id
 	private String _id;
 	@Reference
 	private String url;
 	private int dateDay;
 	@Embedded
-	private ArrayList<ArticleComponent> articleComponents;
+	private List<Component> articleComponents;
 
 	public String getTitle() {
 		return title;
@@ -53,28 +52,12 @@ public class Article implements Comparable<Article> {
 		this.title = title;
 	}
 
-	public String getDateNumber() {
-		return dateNumber;
-	}
-
-	public void setDateNumber(String dateNumber) {
-		this.dateNumber = dateNumber;
-	}
-
 	public String getDateText() {
-		return dateText;
+		return date;
 	}
 
 	public void setDateText(String dateText) {
-		this.dateText = dateText;
-	}
-
-	public String getDateMonth() {
-		return dateMonth;
-	}
-
-	public void setDateMonth(String dateMonth) {
-		this.dateMonth = dateMonth;
+		this.date = dateText;
 	}
 
 	public String getBlurbText() {
@@ -109,20 +92,12 @@ public class Article implements Comparable<Article> {
 		this.url = url;
 	}
 
-	public String getLocator() {
-		return locator;
-	}
-
-	public void setLocator(String locator) {
-		this.locator = locator;
-	}
-
-	public ArrayList<ArticleComponent> getArticleComponents() {
+	public List<Component> getArticleComponents() {
 		return articleComponents;
 	}
 
 	public void setArticleComponents(
-			ArrayList<ArticleComponent> articleComponents) {
+			ArrayList<Component> articleComponents) {
 		this.articleComponents = articleComponents;
 	}
 
@@ -131,21 +106,15 @@ public class Article implements Comparable<Article> {
 	}
 
 	public void processFile(File file) throws IOException, ParseException {
-		//FileUtils.copyFile(file.getAbsolutePath(), new File(WebsiteConstants.ARTICLE_ARCHIVE
-			//	+ File.separator + file.getName());
 		FileUtils.copyFile(file, new File(WebsiteConstants.ARTICLE_ARCHIVE + File.separator + file.getName()));
-		BufferedReader br = new BufferedReader(new FileReader(file));
-		this.title = br.readLine();
-		this.locator=title.toLowerCase().replaceAll("\\W","");
-		System.out.println(locator);
-		this.dateNumber = br.readLine();
-		this.dateText = br.readLine();
-		this.dateMonth = br.readLine();
-		this.blurbText = br.readLine();
+		Scanner br = new Scanner(file);
+		this.title = br.nextLine();
+		this.date = br.nextLine();
+		this.blurbText = br.nextLine();
 		SimpleDateFormat myFormat = new SimpleDateFormat("MM dd yyyy");
-		Date date = myFormat.parse(dateNumber.replace("-", " "));
+		Date fDate = myFormat.parse(date.replace("-", " "));
 		Date jan1 = myFormat.parse("01 01 2016");
-		long diff = date.getTime() - jan1.getTime();
+		long diff = fDate.getTime() - jan1.getTime();
 		System.out.println(diff);
 		System.out.println(TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
 		this.dateDay = (int) (long) TimeUnit.DAYS.convert(diff,
@@ -153,28 +122,9 @@ public class Article implements Comparable<Article> {
 		System.out.println(this.dateDay);
 		this._id = UUID.randomUUID().toString().substring(0,10);
 		this.url = "#/articles/" + this._id;
-		String next;
-		this.articleComponents = new ArrayList<ArticleComponent>();
-		while ((next = br.readLine()) != null) {
-			ArticleComponent ac = new ArticleComponent();
-			ArrayList<String> acImages = new ArrayList<String>();
-			ArrayList<String> acText = new ArrayList<String>();
-			while (next != null && !next.equals("###")) {
-				if (next.substring(0, 6).equals("image:")) {
-					String imagePath = next.substring(6);
-					acImages.add(imagePath);
-				} else {
-					acText.add(next);
-				}
-				next = br.readLine();
-			}
-			ac.setImages(acImages);
-			ac.setTexts(acText);
-			articleComponents.add(ac);
-		}
+		this.articleComponents=Component.processComponents(br);
 		insertIntoDbLocal();
 		insertIntoDbRemote();
-		file.delete();
 	}
 
 	public void serializeIntoFile(File serializeFile) throws IOException {
@@ -185,8 +135,8 @@ public class Article implements Comparable<Article> {
 
 	@Override
 	public String toString() {
-		return "Article [title=" + title + ", dateNumber=" + dateNumber
-				+ ", dateText=" + dateText + ", dateMonth=" + dateMonth
+		return "Article [title=" + title 
+				+ ", date=" + date 
 				+ ", blurbText=" + blurbText + ", id=" + _id + ", url=" + url
 				+ ", dateDay=" + dateDay + ", articleComponents="
 				+ articleComponents + "]";

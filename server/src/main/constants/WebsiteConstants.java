@@ -26,4 +26,5 @@ public class WebsiteConstants {
 	public static final String IMAGE_APPEND="http://jimmy-chen.net:8080/Website/images/";
 	public static final String SOURCE_PROBLEM="/Users/Jimmy/Desktop/website/website-server/teasers/problems";
 	public static final String SOURCE_SOLUTION="/Users/Jimmy/Desktop/website/website-server/teasers/solutions";
+	public static final String SOURCE_TEASER="/Users/Jimmy/Desktop/website/website-server/teasers";
 }

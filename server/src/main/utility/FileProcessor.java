@@ -12,6 +12,7 @@ import models.Article;
 import models.Project;
 import models.Slide;
 import models.Teaser;
+import models.Teaser;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -51,7 +52,19 @@ public class FileProcessor {
 			}
 		}
 	}
-
+	public static void processTeasers2() throws IOException, ParseException{
+		File sourceTeasers = new File(WebsiteConstants.SOURCE_TEASER);
+		File[] sourceTeaserFiles = sourceTeasers.listFiles();
+		for(File f:sourceTeaserFiles){
+			if (!f.isDirectory()){
+				String ext =  FilenameUtils.getExtension(f.getName());
+				Teaser t2 = new Teaser();
+				if (ext.equals("txt")){
+					t2.processFile(f);
+				}
+			}
+		}
+	}
 	public static void proccessProjects() throws IOException, ParseException {
 		File sourceProjectFolder = new File(WebsiteConstants.SOURCE_PROJECTS);
 		File[] sourceProjectFiles = sourceProjectFolder.listFiles();
