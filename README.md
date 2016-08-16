@@ -5,10 +5,15 @@ This is my personal website's back end server. The back end server consists of a
 
 Objects
 -------
-Teasers: Consists of 2 parts the problem and a solution. Problems consist of a list of article components. An Article Component consists of either a image, coding snippet or text and a index or position in the page.
-Solutions are made up of the same article components.
-Teasers are displayed in 2 parts. The solution is displayed after a button is clicked to display it.
-Articles: Consists of a list of article components.
-Slides:  Image and text with link to article that the slide is a brief for.
+Teasers: 
+* [.Consists of 2 parts the problem and a solution. 
+* [.Problems consist of a list of article components. 
+* An Article Component consists of either a image, coding snippet or text and a index or position in the page.
+* [.Solutions are made up of the same article components.
+* [.The solution is displayed after a button is clicked to display it.
+Articles: 
+* [.Consists of a list of article components.
+Slides:  
+* [.Image and text with link to article that the slide is a brief for.
     
     
