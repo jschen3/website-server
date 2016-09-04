@@ -1,0 +1,8 @@
+The Coin Changer
+04 17 2016
+The coin changer is a relatively common recursive question. Essentially given a set of coins and a total sum to create, find the fewest amount of coins to make the sum.
+Recursion
+
+text
+0
+A cash register has coins of values 1 cent, 4 cents and 6 cents.Programmatically determine the fewest number of coins needed to make 8. How would you generalize the algorithm to any given set of coins and total sum? Is it possible to change this algorithm to state the way to find the combination to make the fewest coins?

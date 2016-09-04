@@ -1,0 +1,45 @@
+Fibonacci
+
+text
+0
+In order to program it recursively think of the base cases first. In fibonacci they are given in the problem statement. The 0th fibonacci number is 0 and the 1st is 1. From there how is the next number found. The 2nd fibonacci number is found by adding the 0th and the 1st. From there think about how the nth fibonacci number is created. The nth fibonacci number= (n-1) fibonacci number + (n-2) fibonacci number. From there just program it out.
+
+code
+1
+private static int fibRecursive(int fibNumber){
+	if (fibNumber==1)
+		return 1;
+	if (fibNumber==0)
+		return 0;
+	else{
+		return fibRecursive(fibNumber-1)+fibRecursive(fibNumber-2);
+	}
+}
+###
+
+text
+2
+Using loops it is similar but requires a different kind of thinking. In this method you want to remember the 2 previous fibonacci numbers to make it easy and quick to find the next, you can simply add them together. You shift the numbers around so if the next greater fibonacci is necessary you can continue to simply add. From that thought build your loops and add your base cases.
+
+code
+3
+private static int fibDynamic(int fibNumber){
+	int a=0;
+	int b=1;
+	int c;
+	if (fibNumber==0){
+		return 0;
+	}
+	if (fibNumber==1){
+		return 1;
+	}
+	else{
+		for(int i=0;i<fibNumber;i++){
+			c=a;
+			a=b+a;
+			b=c;
+		}
+		return a;
+	}
+}
+### 

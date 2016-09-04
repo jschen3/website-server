@@ -1,5 +1,6 @@
 package services;
 
+import java.text.ParseException;
 import java.util.Collections;
 import java.util.List;
 
@@ -26,7 +27,7 @@ import constants.WebsiteConstants;
 
 @Path("/articles")
 public class ArticleService {
-	MongoClient mongoClient = new MongoClient(WebsiteConstants.REMOTE_MONGODB,27017);
+	MongoClient mongoClient = new MongoClient(WebsiteConstants.LOCAL_MONGODB,27017);
 	private Morphia morphia = new  Morphia();
 	private Datastore datastore = morphia.createDatastore(mongoClient, "website");
 	@GET
@@ -54,7 +55,9 @@ public class ArticleService {
 	}
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void addArticle(ArticlePrototype articlePrototype){
-		
+	public void addArticle(ArticlePrototype articlePrototype) throws ParseException{
+		Article article=articlePrototype.convertToArticle();
+		article.insertIntoDbLocal();
+		article.insertIntoDbRemote();
 	}
 }

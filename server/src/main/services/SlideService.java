@@ -19,8 +19,8 @@ import com.mongodb.MongoClient;
 import constants.WebsiteConstants;
 
 @Path("/slides")
-public class MongoDBSlideService {
-	MongoClient mongoClient = new MongoClient(WebsiteConstants.REMOTE_MONGODB,27017);
+public class SlideService {
+	MongoClient mongoClient = new MongoClient(WebsiteConstants.LOCAL_MONGODB,27017);
 	private Morphia morphia = new  Morphia();
 	private Datastore datastore = morphia.createDatastore(mongoClient, "website");
 	@GET

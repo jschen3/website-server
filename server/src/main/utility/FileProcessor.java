@@ -28,27 +28,20 @@ public class FileProcessor {
 	static Teaser teaser = new Teaser();
 	static WebsiteConstants wc = new WebsiteConstants();
 	public static void main(String[] args) throws Exception {
-		processSlides();
+		//processSlides();
 		processArticles();
-		processImages();
-		proccessProjects();
+		//processImages();
+		//proccessProjects();
 		processTeasers();
+		
 	}
 	private static void processTeasers() throws IOException, ParseException {
-		File sourceTeaserFolder = new File(WebsiteConstants.SOURCE_PROBLEM);
-		File sourceSolutionFolder = new File(WebsiteConstants.SOURCE_SOLUTION);
+		File sourceTeaserFolder = new File(WebsiteConstants.SOURCE_TEASER);
 		File [] sourceTeasers = sourceTeaserFolder.listFiles();
-		File [] sourceSolutions = sourceSolutionFolder.listFiles();
 		for(File teaserFile:sourceTeasers){
 			if (FilenameUtils.getExtension(teaserFile.getName()).equals("txt")){
 				Teaser t = new Teaser();
-				t.parseProblemFile(teaserFile);
-				for(File solutionFile:sourceSolutions){
-					if (solutionFile.getName().equals(t.getLocator()+".txt")){
-						t.processFiles(teaserFile, solutionFile);
-						System.out.println(teaser);
-					}
-				}
+				t.processFile(teaserFile);
 			}
 		}
 	}
@@ -104,9 +97,6 @@ public class FileProcessor {
 	public static void processArticles() throws Exception{
 		File sourceArticleFolder = new File(WebsiteConstants.SOURCE_ARTICLES);
 		File[] files=sourceArticleFolder.listFiles();
-		Calendar mCalendar = Calendar.getInstance();  
-		String month = mCalendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()).toLowerCase();
-		int i=0;
 		for(File articleFile:files){
 			String ext =  FilenameUtils.getExtension(articleFile.getName());
 			if (ext.equals("txt")){

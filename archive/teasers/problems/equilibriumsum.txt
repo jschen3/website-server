@@ -1,6 +1,0 @@
-Equilibrium Sum
-May 21, 2016
-05 21 2016
-A curious problem that is not that difficult after some thought. A problem that tests your knowledge about addition and requires a bit of out of the box thinking. 
-loops, assosiative property of addition, algorithms
-Find the point or points that the sum before and the sum after are the same in a given array. For an example in the array [-2,1,1,-2,0]. Has an equilibrium point at p=2. -2+1=1+-2+0. Position 0 is having 0 integers in the array. P=0 will only be the equilibrium point when the sum of the array is 0. 

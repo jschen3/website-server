@@ -1,0 +1,54 @@
+Equilibrium Sum
+
+text
+0
+The trick to this problem is finding a quick way to find the sum on either side of the array. If you are at position p what is the sum on the right and what is the sum on the left.
+
+text
+1
+Another idea is the sum from 0 to p, or the sum on the left, can be found iteratively in n time. From this left sum, is there a way to find the sum on the left in constant time from this number? How does the associative property of addition help and play into this?
+
+text
+2
+The sum to the right of p to the end can be found by first calculating the total of the sum of the array. Finally the sum to the right of p and subtracting the left sum. 
+
+text
+3
+From these ideas the code flows simply.
+
+code
+4
+public static void main(String args[]){
+	Scanner sc= new Scanner(System.in);
+	String s=sc.next();
+	String[] sArray = s.split(",");
+	int[] intArray = new int[sArray.length];
+	int c=0;
+	for (String b:sArray){
+		intArray[c]=Integer.parseInt(b);
+		c++;
+	}
+	ArrayList<Integer> points = new ArrayList<Integer>();
+	equilibriumPoints(intArray,points);
+	System.out.println(points);
+}
+###
+
+code
+5
+public static void equilibriumPoints(int[] intArray, ArrayList<Integer> points){
+	int totalSum=0;
+	for (int num:intArray){
+		totalSum+=num;
+	}
+	int curSum=0;
+	if (curSum==totalSum)
+		points.add(0);
+	for (int i=1;i<intArray.length;i++){
+		curSum+=intArray[i-1];
+		int rightSum=totalSum-curSum;
+		if (curSum==rightSum)
+			points.add(i);
+	}
+}
+###

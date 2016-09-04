@@ -1,0 +1,8 @@
+Least Common Ancestor
+05 04 2016
+A very common tree question. I think its quite difficult. But once the recursive step is figured out everything builds from that. Also it tests your basic knowledge of binary trees.
+recursion, binary trees
+
+text
+0
+Given a binary tree with a root and 2 nodes find the least common ancestor between the the nodes. The binary tree is not necessarily sorted were the left node is greater than the right. 

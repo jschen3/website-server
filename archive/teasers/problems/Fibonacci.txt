@@ -1,6 +1,0 @@
-Fibonacci
-April 26,2016
-04 26 2016
-One of the first recursive lessons ever taught is the fibonacci sequence. Lets see if you remember how to program it recursive and iteratively.
-recursion, loops
-Given ,an integer, n find the nth fibonacci number. 0 is the 0th fibonacci. 1 is the first fibonnacci number.

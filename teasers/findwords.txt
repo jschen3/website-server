@@ -1,0 +1,32 @@
+Find Words
+04 24 2016
+A simple finding words problem. It can be done easily with a set of loops
+Loops, standard in, standard out
+
+text
+0
+Given a stream of characters (e.g. acacabcatghhellomvnsdb) and a list of words (e.g.["aca","cat","hello","world"] ) find and display count of each and every word once the stream ends. The stream of characters and list of words will be given through standard in and standard out. 
+
+text
+1
+In the format:
+
+text
+2
+acacabcatghhellomvnsdb
+
+text
+3
+aca,cat,hello,world
+
+text
+4
+The 1 is the number of trials
+
+text
+5
+The second line is the main string
+
+text
+6
+the third line is list of words to find.

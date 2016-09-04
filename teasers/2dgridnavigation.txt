@@ -1,0 +1,28 @@
+2D Grid Navigation
+04 30 2016
+Another stereotypical recursive question that is very commonly asked. Easy once you get use to thinking recursively. Given 2 points on a 2D grid find the number of ways possible to get to from 1 point to the other. 
+recursion, graph traversal
+
+text
+0
+Given 2 points find the number of ways to reach the other point if you can only go right and up. An example is the number of ways to get from (0,0) to (1,1). There are 2 ways. {(0,0),(1,0),(1,1)} ,{(0,0),(0,1),(1,1)}. 
+
+text
+1
+Input format:
+
+text
+2
+(0,0)
+
+text
+3
+(3,3)
+
+text
+4
+Point 1
+
+text
+5
+Point 2

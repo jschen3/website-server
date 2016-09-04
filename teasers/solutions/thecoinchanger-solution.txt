@@ -1,0 +1,49 @@
+The Coin Changer
+
+code
+4
+void change(int current, int coins){    
+    if (current==1){
+        coins++;
+        if (this.minimum>coins);
+            this.minimum=coins;
+
+    }
+    else if (current==4){
+        coins++;
+        if (this.minimum>coins);
+            this.minimum=coins;
+    }
+    else if (current==6){
+        coins++;
+        if (this.minimum>coins);
+            this.minimum=coins;
+    }
+    else{
+        if (current>6){
+            change(current-6,coins+1);
+            change(current-4,coins+1);
+            change(current-1,coins+1);
+        }
+        else if (current>4){
+            change(current-4,coins+1);
+            change(current-1,coins+1);
+        }
+        else{
+            change(current-1,coins+1);
+        }
+    }
+}
+###
+
+text
+0
+The secret to this question is thinking about this question like anyother recursive question. How do you break this problem into simpler cases.
+
+text
+1
+Are there any cases that are the simplest? In this case are there any cases where the solution is only 1 coin away. Those are your base cases. And then how do you get to your base cases. Is the problem any simpler if you take away a coin? In this example the problem gets significantly easier after you take a coin away. You only need to figure out the fewest coins to make 7 cents, 4 cents and 2 cents. After realizing the recursion all thats left is programming it out.
+
+text
+2
+How can you make sure you call all the cases in recursion. Also be careful thinking that the fewest amount of coins is found by taking as many of the largest coin first. This case doesn't work as taking the largest value first results in 6,1,1 rather than the fewest 4,4.

@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
+import models.subobjects.Component;
+import models.subobjects.ComponentPrototype;
+
 public class ArticlePrototype {
 	String title;
 	String blurb;
@@ -64,11 +67,13 @@ public class ArticlePrototype {
 			}
 			if (cp.getImagePath().length()>0){
 				Component newCp = new Component(article.getTitle(), "image", cp.getIndex()+1, cp.getImagePath());
+				cpList.add(newCp);
 			}
 			if (cp.getText().length()>0){
 				Component newCp = new Component(article.getTitle(), "text", cp.getIndex()+2, cp.getText());
+				cpList.add(newCp);
 			}
 		}
-		
+		return article;
 	}
 }

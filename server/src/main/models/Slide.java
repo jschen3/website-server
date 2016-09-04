@@ -24,6 +24,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.util.JSON;
 
 import constants.WebsiteConstants;
+import models.subobjects.Link;
 
 @JsonIgnoreProperties({"morphia","mongoClient","datastore"})
 @Entity("slides")
@@ -34,9 +35,6 @@ public class Slide {
 	private String text;
 	@Id
 	private ObjectId _id;
-	private boolean readMoreSlide;
-	@Reference
-	private String readMoreUrl;
 	@Embedded
 	private ArrayList<Link> links;
 
@@ -69,18 +67,6 @@ public class Slide {
 	}
 	public void setId(ObjectId id) {
 		this._id = id;
-	}
-	public boolean isReadMoreSlide() {
-		return readMoreSlide;
-	}
-	public void setReadMoreSlide(boolean readMoreSlide) {
-		this.readMoreSlide = readMoreSlide;
-	}
-	public String getReadMoreUrl() {
-		return readMoreUrl;
-	}
-	public void setReadMoreUrl(String readMoreUrl) {
-		this.readMoreUrl = readMoreUrl;
 	}
 	public void processFile(File file) throws IOException{
 		Files.copy(file.toPath(), new File(WebsiteConstants.SLIDE_ARCHIVE

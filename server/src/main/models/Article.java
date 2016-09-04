@@ -30,6 +30,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.MongoClient;
 
 import constants.WebsiteConstants;
+import models.subobjects.Component;
 
 @Entity("articles")
 public class Article implements Comparable<Article> {
@@ -41,9 +42,9 @@ public class Article implements Comparable<Article> {
 	@Reference
 	private String url;
 	private int dateDay;
+	private String dateText;
 	@Embedded
 	private List<Component> articleComponents;
-
 	public String getTitle() {
 		return title;
 	}
@@ -52,18 +53,18 @@ public class Article implements Comparable<Article> {
 		this.title = title;
 	}
 
-	public String getDateText() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDateText(String dateText) {
-		this.date = dateText;
+	public void setDate(String date) {
+		this.date = date;
 	}
 
 	public String getBlurbText() {
 		return blurbText;
 	}
-
+	
 	public void setText(String text) {
 		this.blurbText = text;
 	}
@@ -91,7 +92,12 @@ public class Article implements Comparable<Article> {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-
+	public String getDateText(){
+		return this.dateText;
+	}
+	public void setDateText(String dateText){
+		this.dateText=dateText;
+	}
 	public List<Component> getArticleComponents() {
 		return articleComponents;
 	}
@@ -111,20 +117,21 @@ public class Article implements Comparable<Article> {
 		this.title = br.nextLine();
 		this.date = br.nextLine();
 		this.blurbText = br.nextLine();
+		System.out.println(title);
 		SimpleDateFormat myFormat = new SimpleDateFormat("MM dd yyyy");
-		Date fDate = myFormat.parse(date.replace("-", " "));
+		Date fDate = myFormat.parse(date);
 		Date jan1 = myFormat.parse("01 01 2016");
 		long diff = fDate.getTime() - jan1.getTime();
-		System.out.println(diff);
-		System.out.println(TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
 		this.dateDay = (int) (long) TimeUnit.DAYS.convert(diff,
 				TimeUnit.MILLISECONDS);
-		System.out.println(this.dateDay);
+		SimpleDateFormat properFormat= new SimpleDateFormat("MMMM dd, yyyy");
+		this.dateText=properFormat.format(fDate);
+		System.out.println(dateText);
 		this._id = UUID.randomUUID().toString().substring(0,10);
 		this.url = "#/articles/" + this._id;
-		this.articleComponents=Component.processComponents(br);
+		this.articleComponents=Component.processComponents(title, br);
 		insertIntoDbLocal();
-		insertIntoDbRemote();
+		//insertIntoDbRemote();
 	}
 
 	public void serializeIntoFile(File serializeFile) throws IOException {

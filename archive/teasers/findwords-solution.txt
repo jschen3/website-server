@@ -1,0 +1,31 @@
+Find Words
+
+text:
+0
+Break the problem into a series of steps. Those steps are first record the number of trials through standard in. Next scan in the main string and lastly scan in the line of words to find. After that parse the line into the individual string. After everything is scanned in search for each string in the main string. Another trick is to be careful to continue scanning the rest of the main string after the first instance is found. If all this is done the code is simple.
+
+code:
+1
+Scanner sc = new Scanner(System.in);
+int trials=sc.nextInt();
+for (int i=0;i<trials;i++){
+	String mainString=sc.next();
+	String stringArray=sc.next();
+	String[] fragments=stringArray.split(",");
+	int[] counts = new int[fragments.length];
+	
+	for (int f=0;f<fragments.length;f++){
+		int indexFound=0;
+		while(indexFound!=-1){
+			indexFound=mainString.indexOf(fragments[f],indexFound);
+			if (indexFound!=-1){
+				counts[f]++;
+				indexFound++;
+			}
+		}
+	}
+	for (int c=0;c<fragments.length;c++){
+		System.out.println(fragments[c]+" : "+counts[c]);
+	}
+}
+###

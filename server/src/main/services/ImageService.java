@@ -5,8 +5,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.OPTIONS;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -35,7 +37,7 @@ import constants.WebsiteConstants;
 
 @Path("/images")
 public class ImageService {
-	MongoClient mongoClient = new MongoClient(WebsiteConstants.REMOTE_MONGODB, 27017);
+	MongoClient mongoClient = new MongoClient(WebsiteConstants.LOCAL_MONGODB, 27017);
 	DB mongoDB = mongoClient.getDB("images");
 	@GET
 	@Produces({"image/png","image/jpg","image/gif"})
@@ -54,18 +56,18 @@ public class ImageService {
 		out.flush();
 		return Response.ok(out.toByteArray()).header("Content-Disposition", "inline; filename="+fileName).build();
 	}
-	@POST
-	public Response uploadFile(@FormParam("file") InputStream uploadInputStream, @FormParam("title") String title, @FormParam("file") FormDataContentDisposition fileDetail) throws IOException{
-		String filename=fileDetail.getFileName();
-		GridFS imageStore = new GridFS(mongoDB, title);
-		File f = new File(filename);
-		FileUtils.copyInputStreamToFile(uploadInputStream, f);
-		GridFSInputFile inputFile = imageStore.createFile(f);
-		inputFile.setId(new ObjectId());
-		inputFile.setFilename(f.getName());
-		System.out.println(f.getName());
-		inputFile.save();
-		return Response.ok().build();
-	}
+	
+//	public Response uploadFile(@PathParam("title") String title,@FormParam("file") InputStream uploadInputStream,@FormParam("file") FormDataContentDisposition fileDetail) throws IOException{
+//		String filename=fileDetail.getFileName();
+//		GridFS imageStore = new GridFS(mongoDB, title);
+//		File f = new File(filename);
+//		FileUtils.copyInputStreamToFile(uploadInputStream, f);
+//		GridFSInputFile inputFile = imageStore.createFile(f);
+//		inputFile.setId(new ObjectId());
+//		inputFile.setFilename(f.getName());
+//		System.out.println(f.getName());
+//		inputFile.save();
+//		return Response.ok().build();
+//	}
 	
 }

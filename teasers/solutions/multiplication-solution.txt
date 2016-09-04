@@ -1,0 +1,42 @@
+Mulitplication
+
+text
+0
+Simply think about how you normally do multiplication by hand and consider a simple case a single digit multiplied by a 3 digit number. Then shift and do it for multidigit multicands.
+
+code
+1
+String number1;
+String number2;
+Scanner sc = new Scanner(System.in);
+number1=sc.next();
+number2=sc.next();
+int positionFirstNumber=number1.length()-1;
+int positionSecondNumber=number2.length()-1;
+int positionSecondShift=1;
+int total=0;
+while(positionSecondNumber>-1){
+	int carry=0;
+	int currentSum=0;
+	int shift=1;
+	positionFirstNumber=number1.length()-1;
+	while(positionFirstNumber>-1){
+		int topNum=number1.charAt(positionFirstNumber)-'0';
+		int bottomNum=number2.charAt(positionSecondNumber)-'0';
+		int product=topNum*bottomNum+carry;
+		carry=product/10;
+		int rest=product%10;
+		positionFirstNumber--;
+		if (positionFirstNumber==-1)
+			currentSum+=product*shift;
+		else
+			currentSum+=rest*shift;
+		shift=shift*10;
+	}
+	//System.out.println(currentSum);
+	total+=currentSum*positionSecondShift;
+	positionSecondNumber--;
+	positionSecondShift*=10;
+}
+System.out.println(total);
+###

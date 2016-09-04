@@ -1,0 +1,8 @@
+Maximum SubArray Problem
+04 29 2016
+The maximum subarray problem is tricky commonly asked interview question that has many applications. There are 2 common solutions brute force and a clever manner with an algorithm. Lets see if you can derive both.
+loops, maximums, hard
+
+text
+0
+Given a string of numbers find the maximum sub array. Namely the start point and end point that create the largest continuous sum. For an example in the sequence -5,2,-4,5,6,-11,4. The maximum sub array is [5,6].
