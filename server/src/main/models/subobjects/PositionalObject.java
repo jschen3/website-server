@@ -3,7 +3,7 @@ package models.subobjects;
 import org.mongodb.morphia.annotations.Embedded;
 
 @Embedded
-public class PositionalObject {
+public class PositionalObject implements Comparable<PositionalObject>{
 	private int position;
 	private String positionWords;
 	public int getPosition() {
@@ -17,5 +17,10 @@ public class PositionalObject {
 	}
 	public void setPositionWords(String positionWords) {
 		this.positionWords = positionWords;
+	}
+	@Override
+	public int compareTo(PositionalObject o) {
+		int compareValue= o.getPosition();
+		return compareValue- this.position;
 	}
 }

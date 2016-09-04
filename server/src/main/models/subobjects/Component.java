@@ -25,10 +25,10 @@ public class Component implements Comparable<Component>{
 	public void setType(String type) {
 		this.type = type;
 	}
-	public int getPosition() {
+	public PositionalObject getPosition() {
 		return position;
 	}
-	public void setPosition(int position) {
+	public void setPosition(PositionalObject position) {
 		this.position = position;
 	}
 	public String getContent() {
